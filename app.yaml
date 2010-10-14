@@ -1,0 +1,34 @@
+application: octahedronblog
+version: construction
+runtime: python
+api_version: 1
+
+handlers:
+- url: '/'
+  static_files: 'index.html'
+  upload: '.*'
+- url: '/404.html'
+  static_files: '404.html'
+  upload: '.*'
+
+- url: /images
+  static_dir: images
+- url: /images/(.*)
+  static_files: images/\1
+  upload: fonts/(.*)
+
+- url: /fonts
+  static_dir: fonts
+- url: /fonts/(.*)
+  static_files: fonts/\1
+  upload: fonts/(.*)
+
+- url: /css
+  static_dir: css
+- url: /css/(.*)
+  static_files: css/\1
+  upload: css/(.*)
+
+- url: '/(.*)'
+  static_files: '404.html'
+  upload: '/(.*)'
