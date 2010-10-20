@@ -1,0 +1,12 @@
+As a user
+I want to log me in
+So that I can see toolbar
+
+Scenario 1 - Logging me
+Given
+	I go to "http://localhost:8080/login"
+When
+	I click "submit-login" button and wait
+Then
+	I see that current page contains "Olá test@example.com"
+

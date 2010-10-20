@@ -1,0 +1,11 @@
+As a user
+I want to visit the index page
+So that I cant see none posts
+
+Scenario 1 - Visiting page with no post.
+Given
+	I go to "http://localhost:8080/"
+When
+Then
+	I see that current page contains "Nenhum post"
+

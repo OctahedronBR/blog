@@ -1,0 +1,35 @@
+As a logged user
+I want to create a post
+So that I can see it in blog
+
+Scenario 1 - Creating post without content
+Given
+	I go to "http://localhost:8080/post/new"
+When
+	And I fill "title" textbox with "Título I"
+	And I click "submit" button
+Then
+	And I see that current page contains "Preencha o formulário corretamente!"
+
+Scenario 2 - Creating post without title
+Given
+	I go to "http://localhost:8080/post/new"
+When
+	And I fill "title" textbox with "Título I"
+	And I click "submit" button
+Then
+	And I see that current page contains "Preencha o formulário corretamente!"
+
+
+Scenario 3 - Creating correctly a new post
+Given
+	I go to "http://localhost:8080/post/new"
+When
+	I wait for the page to load for 5 seconds
+	And I fill "title" textbox with "Título I"
+	And I fill "content" textbox with "Conteúdo do post aqui!"
+	And I click "submit" button and wait
+Then
+	I see that current page contains "Título I"
+	And I see that current page contains "Conteúdo do post aqui!"
+
