@@ -7,12 +7,11 @@ Given
 	I go to "http://localhost:8080/"
 	And I see that current page contains "Título I"
 When
-	I click "edit-1" link
-	And I wait for the page to load for 5 seconds
+	I click "post-1" link and wait
+	And I click "edit" link and wait
 	And I clean "content" textbox
 	And I click "submit" button
 Then
-	I wait for 1 seconds
 	And I see that current page contains "Preencha o formulário corretamente!"
 
 Scenario 2 - Updating post listed in index page without title
@@ -20,8 +19,8 @@ Given
 	I go to "http://localhost:8080/"
 	And I see that current page contains "Título I"
 When
-	I click "edit-1" link
-	And I wait for the page to load for 5 seconds
+	I click "post-1" link and wait
+	And I click "edit" link and wait
 	And I clean "title" textbox
 	And I click "submit" button
 Then
@@ -32,8 +31,8 @@ Given
 	I go to "http://localhost:8080/"
 	And I see that current page contains "Título I"
 When
-	I click "edit-1" link
-	And I wait for the page to load for 5 seconds
+	I click "post-1" link and wait
+	And I click "edit" link and wait
 	And I fill "title" textbox with "Título II"
 	And I fill "content" textbox with "Conteúdo2 do post aqui!"
 	And I click "submit" button and wait
