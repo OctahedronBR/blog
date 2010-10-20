@@ -1,14 +1,14 @@
 {% extends "layout.tpl" %}
 {% block body %}
 	<p class="warning"></p>
-	<form action="/post/create" method="post">
+	<form action="/post/update" method="post">
 		<fieldset>
 			<input type="hidden" name="key" value="{{ post.key() }}" />
 			<label for="title">Título</label> <br />
 			<input id="title" type="text" name="title" value="{{ post.title }}" /> <br />
 			<label for="content">Conteúdo</label> <br />
 			<textarea id="content" type="text" name="content">{{ post.content }}</textarea> <br />
-			<input type="submit" value="Atualizar" />
+			<input id="submit" type="submit" value="Atualizar" />
 		</fieldset>
 	</form>
 

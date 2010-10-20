@@ -7,7 +7,7 @@ Given
 	I go to "http://localhost:8080/"
 	And I see that current page contains "Título I"
 When
-	I click "post-1" link and wait
+	I click "post" link and wait
 	And I click "edit" link and wait
 	And I clean "content" textbox
 	And I click "submit" button
@@ -19,7 +19,7 @@ Given
 	I go to "http://localhost:8080/"
 	And I see that current page contains "Título I"
 When
-	I click "post-1" link and wait
+	I click "post" link and wait
 	And I click "edit" link and wait
 	And I clean "title" textbox
 	And I click "submit" button
@@ -31,7 +31,7 @@ Given
 	I go to "http://localhost:8080/"
 	And I see that current page contains "Título I"
 When
-	I click "post-1" link and wait
+	I click "post" link and wait
 	And I click "edit" link and wait
 	And I fill "title" textbox with "Título II"
 	And I fill "content" textbox with "Conteúdo2 do post aqui!"

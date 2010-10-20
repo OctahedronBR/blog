@@ -60,8 +60,13 @@ def page_not_found(error):
 	return error, 404
 
 # API
-@app.route('/posts/<int:limit>')
-def posts(limit):
+@app.route('/json/<int:limit>')
+def json(limit):
+	#todo
+	return "todo"
+
+@app.route('/rss/<int:limit>')
+def rss(limit):
 	#todo
 	return "todo"
 
