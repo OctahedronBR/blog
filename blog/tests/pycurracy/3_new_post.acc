@@ -25,8 +25,7 @@ Scenario 3 - Creating correctly a new post
 Given
 	I go to "http://localhost:8080/post/new"
 When
-	I wait for the page to load for 5 seconds
-	And I fill "title" textbox with "Título I"
+	I fill "title" textbox with "Título I"
 	And I fill "content" textbox with "Conteúdo do post aqui!"
 	And I click "submit" button and wait
 Then

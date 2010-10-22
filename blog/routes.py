@@ -23,10 +23,11 @@ def post_new():
 @login_required
 def post_create():
 	params = request.form
-	slug = slugify(params['title'])
+	slug = (slugify(params['title']), params['slug'])[len(params['slug']) > 0]
 	post = Post(title=params['title'], content=params['content'], author=users.get_current_user(), slug=slug)
 	# todo try, catch
 	post.put()
+
 	return redirect(url_for('slug', slug=slug))
 
 @app.route('/post/edit/<key>')
@@ -36,6 +37,7 @@ def post_edit(key):
 	if post:
 		return render("edit_post.tpl", post=post)
 	else:
+		# todo: error message
 		return redirect(url_for('index'))
 
 @app.route('/post/update', methods=['POST'])
@@ -43,8 +45,18 @@ def post_edit(key):
 def post_update():
 	params = request.form
 	post_key = Key(params['key'])
-	# todo update post
-	return redirect(url_for('slug', post_key=post_key))
+	post = Post.all().filter('__key__ =', post_key).get()
+
+	if post:
+		post.title = params['title']
+		post.slug = (slugify(params['title']), params['slug'])[len(params['slug']) > 0]
+		post.content = params['content']
+		post.put()
+
+		return redirect(url_for('slug', slug=post.slug))
+	else:
+		# todo: error message
+		return redirect(url_for('index'))
 
 @app.route('/<slug>')
 def slug(slug):
