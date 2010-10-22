@@ -1,5 +1,7 @@
-Integração com twitter (http://joshthecoder.github.com/tweepy/)
+Tags
+UI / Rich Editor BBCode
 RSS
 JSON
-UI / Rich Editor BBCode
 BBcode render / strip html code before safe at database
+MultiBlogs
+Integração com twitter (http://joshthecoder.github.com/tweepy/)
