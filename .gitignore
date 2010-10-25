@@ -1,2 +1,4 @@
 *.pyc
 report.html
+.project
+.pydevproject
