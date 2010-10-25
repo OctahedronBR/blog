@@ -67,12 +67,12 @@ def page_not_found(error):
 
 # API
 @app.route('/json/<int:limit>')
-def json(limit):
+def json(limit=10):
 	#todo
 	return "todo"
 
 @app.route('/rss/<int:limit>')
-def rss(limit):
+def rss(limit=10):
 	#todo
 	return "todo"
 
