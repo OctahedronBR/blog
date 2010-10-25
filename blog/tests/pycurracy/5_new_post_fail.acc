@@ -1,0 +1,10 @@
+As a logged user
+I want to create a post with a slug that already exists
+So that I cannot create and see it
+
+Scenario 1 - TODO
+Given
+	I go to "http://localhost:8080/"
+When
+Then
+
