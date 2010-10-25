@@ -1,6 +1,5 @@
-Tags / falta listar posts por tag
-Paginar posts 
+Paginar posts (usar offset ou cursor?)
+Memcache
 UI / Rich Editor BBCode
-RSS
 BBcode render / strip html code before safe at database
 Integração com twitter (http://joshthecoder.github.com/tweepy/)

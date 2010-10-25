@@ -13,6 +13,8 @@ def create_post(form):
 		post = Post(title=form['title'], slug=slug, content=form['content'], tags=tags, author=users.get_current_user())
 #		post = Post(title=form['title'], slug=slug, content=form['content'], tags=tags, author="danilo") # to be used on tests
 		post.put()
+		# adicionar ao memcache por slug, key, tag
+		# remover memcache allposts
 		return post
 	except:
 		#todo: error message
@@ -26,24 +28,52 @@ def update_post(form):
 		post.slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0]
 		post.content = form['content']
 		post.put() #todo: try, catch
+		# adicionar ao memcache por slug
+		# remover memcache allposts
 
 		return post
 	else:
 		return false
 
 def get_all_posts(size=5):
+	# recuperar posts do memcache se houver (class + size)
 	query = Post.all()
 	query.order('-when')
 	return query.fetch(size)
 
 def get_post_by_key(key):
+	# recuperar do memcache
 	return Post.all().filter("__key__ =", Key(key)).get()
 
 def get_post_by_slug(slug):
+	# recuperar do memcache
 	return Post.all().filter("slug =", slug).get()
 
 def get_posts_by_tag(tag, size = 5):
+	# recuperar do memcache
 	return Post.all().filter("tag =", tag).fetch(size)
+
+def configure(form):
+	config = Config.all().get()
+	if not config:
+		config = Config()
+	config.blogname = form['url']
+	config.url = form['url']
+	config.desc = form['desc']
+	config.lang = form['lang']
+	
+	#adjust url
+	config.url = config.url.lstrip()
+	config.url = config.url.rstrip()
+	if not config.url.endswith('/'):
+		config.url += '/'
+		
+	config.put()
+	# atualizar memcache
+	
+def get_config(): 
+	# recuperar do memcache
+	return Config.all().get()
 
 # Classes
 class Post(db.Model):
@@ -52,6 +82,11 @@ class Post(db.Model):
     content = db.TextProperty(required = True)
     when = db.DateTimeProperty(auto_now_add = True)
     tags = db.StringListProperty()
-    author = db.UserProperty(required = True)
-#    author = db.StringProperty(required = True) # to be used on tests
+#    author = db.UserProperty(required = True)
+    author = db.StringProperty(required = True) # to be used on tests
 
+class Config(db.Model):
+	blogname = db.StringProperty()
+	url = db.StringProperty()
+	desc = db.StringProperty()
+	lang = db.StringProperty()

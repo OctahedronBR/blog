@@ -1,4 +1,5 @@
 from functools import wraps
+import model
 from google.appengine.api import users
 from flask import redirect, request, render_template
 import re
@@ -15,7 +16,8 @@ def login_required(func):
 # Other
 def render(template_name, **args):
 	user = users.get_current_user()
-	return render_template(template_name, user=user, **args)
+	config = model.get_config()
+	return render_template(template_name, config=config, user=user, **args)
 
 _slugify_strip_re = re.compile(r'[^\w\s-]')
 _slugify_hyphenate_re = re.compile(r'[-\s]+')

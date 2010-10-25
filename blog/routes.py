@@ -1,10 +1,9 @@
 from StringIO import StringIO
-
 from flask import render_template, url_for, request, redirect
 from simplejson.encoder import JSONEncoder
 from blog import app, model
-from blog.model import Post
-from blog.util import render, login_required, slugify, get_slug_link
+from blog.model import Post, Config
+from blog.util import render, login_required, slugify
 from google.appengine.api import users, namespace_manager
 import feedgenerator
 
@@ -15,9 +14,32 @@ def before_request():
 		namespace_manager.set_namespace(request.url_root[8:-1])
 
 
+@app.route('/config')
+#@login_required
+def create_config():
+	if model.get_config():
+		return redirect(url_for('edit_config'))
+	else:
+		return render("create_config.tpl")
+
+@app.route('/config/edit')
+#@login_required
+def edit_config():
+	return render("config.tpl")
+
+
+@app.route('/config/save', methods=['POST'])
+#@login_required
+def configure():
+	model.configure(request.form)
+	return redirect(url_for('edit_config'))
+
 @app.route('/')
 def index():
-	return render("index.tpl", posts=model.get_all_posts())
+	if not model.get_config():
+		return redirect(url_for('create_config'))
+	else:
+		return render("index.tpl", posts=model.get_all_posts())
 
 @app.route('/login')
 def login():
@@ -97,13 +119,14 @@ def json(limit=10):
 @app.route('/rss')
 @app.route('/rss/<int:limit>')
 def rss(limit=10):
+	config = model.get_config()
 	#TODO load info from properties
 	# we can create and property for each blog
-	feed = feedgenerator.Rss201rev2Feed(title=u"Poynter E-Media Tidbits",
-									link=request.url_root,
-									feed_url=urequest.url_root + "rss",
-									description=u"A group weblog by the sharpest minds in online media/journalism/publishing.",
-									language=u"en")
+	feed = feedgenerator.Rss201rev2Feed(title=config.blogname,
+									link=config.url,
+									feed_url=config.url + "rss",
+									description=config.desc,
+									language=config.lang)
 	
 	posts = model.get_all_posts(limit)
 	for post in posts:
