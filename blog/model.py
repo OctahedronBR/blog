@@ -42,6 +42,9 @@ def get_post_by_key(key):
 def get_post_by_slug(slug):
 	return Post.all().filter("slug =", slug).get()
 
+def get_posts_by_tag(tag, size = 5):
+	return Post.all().filter("tag =", tag).fetch(size)
+
 # Classes
 class Post(db.Model):
     title = db.StringProperty(required = True)

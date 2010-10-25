@@ -63,6 +63,11 @@ def slug(slug):
 	else:
 		return redirect(url_for('index'))
 
+@app.route('/tag/<tag>')
+def tag(tag):
+	# TODO check tpl page
+	return render("index.tpl", posts=model.get_posts_by_tag(tag))
+
 @app.errorhandler(404)
 def page_not_found(error):
 	# todo
