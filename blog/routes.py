@@ -1,9 +1,12 @@
+from StringIO import StringIO
+
 from flask import render_template, url_for, request, redirect
 from simplejson.encoder import JSONEncoder
 from blog import app, model
 from blog.model import Post
-from blog.util import render, login_required, slugify
+from blog.util import render, login_required, slugify, get_slug_link
 from google.appengine.api import users, namespace_manager
+import feedgenerator
 
 
 @app.before_request
@@ -83,16 +86,35 @@ def json(limit=10):
 	for post in posts:
 		entry = {}
 		entry['title'] = post.title
-		entry['slug'] = post.slug
-		entry['author'] = post.author
+		entry['slug'] = request.url_root + post.slug
+		entry['author'] = post.author.nickname()
 		entry['when'] = post.when.strftime("%d %b %Y %I:%M:%S %p") 
 		entry['content'] = post.content
 		entry['tags'] = post.tags
 		to_json.append(entry)
 	return JSONEncoder().encode(entry)
 
+@app.route('/rss')
 @app.route('/rss/<int:limit>')
 def rss(limit=10):
-	#todo
-	return "todo"
-
+	#TODO load info from properties
+	# we can create and property for each blog
+	feed = feedgenerator.Rss201rev2Feed(title=u"Poynter E-Media Tidbits",
+									link=request.url_root,
+									feed_url=urequest.url_root + "rss",
+									description=u"A group weblog by the sharpest minds in online media/journalism/publishing.",
+									language=u"en")
+	
+	posts = model.get_all_posts(limit)
+	for post in posts:
+		feed.add_item(title=post.title, 
+					link=request.url_root + post.slug,
+					author_name = post.author.nickname(), 
+					description=post.content,
+					pubdate = post.when)
+	out = StringIO()
+	feed.write(out, 'utf-8')
+	try:
+		return out.getvalue()
+	finally:
+		out.close()
