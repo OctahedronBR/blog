@@ -12,7 +12,11 @@
 			{% endif %}
 			<h1>Octahedron</h1>
 		</div>
+		<div id="content">
 		{% block body %}{% endblock %}
+		</div>
+		<div id="sidebar">
+		</div>
 	</body>
 </html>
 

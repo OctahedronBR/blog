@@ -1,9 +1,13 @@
-from flask import render_template, url_for, request, redirect, _request_ctx_stack
+from flask import render_template, url_for, request, redirect
 from blog import app
 from blog.models import Post
 from blog.util import render, login_required, slugify
-from google.appengine.api import users
+from google.appengine.api import users, namespace_manager
 from google.appengine.ext.db import Key
+
+@app.before_request
+def before_request():
+	namespace_manager.set_namespace(request.url_root)
 
 @app.route('/')
 def index():

@@ -21,7 +21,7 @@ Then
 	And I see that current page contains "Preencha o formulário corretamente!"
 
 
-Scenario 3 - Creating correctly a new post
+Scenario 3 - Creating correctly a new post with no slug
 Given
 	I go to "http://localhost:8080/post/new"
 When
@@ -31,4 +31,15 @@ When
 Then
 	I see that current page contains "Título I"
 	And I see that current page contains "Conteúdo do post aqui!"
+
+Scenario 4 - Creating correctly a new post with custom slug
+Given
+	I go to "http://localhost:8080/post/new"
+When
+	I fill "title" textbox with "Título II"
+	And I fill "content" textbox with "Conteúdo2 do post aqui!"
+	And I click "submit" button and wait
+Then
+	I see that current page contains "Título II"
+	And I see that current page contains "Conteúdo2 do post aqui!"
 
