@@ -1,18 +1,17 @@
 from flask import render_template, url_for, request, redirect
-from blog import app
-from blog.models import Post
+from blog import app, model
+from blog.model import Post
 from blog.util import render, login_required, slugify
 from google.appengine.api import users, namespace_manager
-from google.appengine.ext.db import Key
 
 @app.before_request
 def before_request():
-	namespace_manager.set_namespace(request.url_root)
+	if (request.url_root.find("localhost") == -1):
+		namespace_manager.set_namespace(request.url_root[8:-1])
 
 @app.route('/')
 def index():
-	posts = Post.all().fetch(5)
-	return render("index.tpl", posts=posts)
+	return render("index.tpl", posts=model.get_all_posts())
 
 @app.route('/login')
 def login():
@@ -26,18 +25,17 @@ def post_new():
 @app.route('/post/create', methods=['POST'])
 @login_required
 def post_create():
-	params = request.form
-	slug = (slugify(params['title']), params['slug'])[len(params['slug']) > 0]
-	post = Post(title=params['title'], content=params['content'], author=users.get_current_user(), slug=slug)
-	# todo try, catch
-	post.put()
-
-	return redirect(url_for('slug', slug=slug))
+	post = model.create_post(request.form)
+	if post:
+		return redirect(url_for('slug', slug=post.slug))
+	else:
+		# todo: error message
+		return redirect(url_for('post_new'))
 
 @app.route('/post/edit/<key>')
 @login_required
 def post_edit(key):
-	post = Post.all().filter("__key__ =", Key(key)).get()
+	post = model.get_post_by_key(key)
 	if post:
 		return render("edit_post.tpl", post=post)
 	else:
@@ -47,16 +45,8 @@ def post_edit(key):
 @app.route('/post/update', methods=['POST'])
 @login_required
 def post_update():
-	params = request.form
-	post_key = Key(params['key'])
-	post = Post.all().filter('__key__ =', post_key).get()
-
+	post = model.update_post(request.form)
 	if post:
-		post.title = params['title']
-		post.slug = (slugify(params['title']), params['slug'])[len(params['slug']) > 0]
-		post.content = params['content']
-		post.put()
-
 		return redirect(url_for('slug', slug=post.slug))
 	else:
 		# todo: error message
@@ -64,7 +54,7 @@ def post_update():
 
 @app.route('/<slug>')
 def slug(slug):
-	post = Post.all().filter("slug =", slug).get()
+	post = model.get_post_by_slug(slug)
 	if post:
 		return render("post.tpl", post=post)
 	else:
