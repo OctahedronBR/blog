@@ -43,3 +43,9 @@ Then
 	I see that current page contains "Título II"
 	And I see that current page contains "Conteúdo2 do post aqui!"
 
+Scenario 5 - Creating correctly a new post with custom tags TODO
+Given
+	I go to "http://localhost:8080/post/new"
+When
+Then
+

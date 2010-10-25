@@ -56,7 +56,7 @@ def post_update():
 def slug(slug):
 	post = model.get_post_by_slug(slug)
 	if post:
-		return render("post.tpl", post=post)
+		return render("post.tpl", post=post, tags="".join(post.tags, ", "))
 	else:
 		return redirect(url_for('index'))
 

@@ -9,7 +9,7 @@
 			<button id="slugify">Slugify!</button> <br />
 			<label for="content">Conteúdo</label> <br />
 			<textarea name="content"></textarea> <br />
-			<label for="tags">Tags</label> <br />
+			<label for="tags">Tags (e.g.: cloud computing, appengine, python)</label> <br />
 			<input type="text" name="tags" /> <br />
 			<input id="submit" type="submit" value="Criar" />
 		</fieldset>
