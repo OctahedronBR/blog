@@ -1,13 +1,16 @@
 from flask import render_template, url_for, request, redirect
+from simplejson.encoder import JSONEncoder
 from blog import app, model
 from blog.model import Post
 from blog.util import render, login_required, slugify
 from google.appengine.api import users, namespace_manager
 
+
 @app.before_request
 def before_request():
 	if (request.url_root.find("localhost") == -1):
 		namespace_manager.set_namespace(request.url_root[8:-1])
+
 
 @app.route('/')
 def index():
@@ -56,7 +59,7 @@ def post_update():
 def slug(slug):
 	post = model.get_post_by_slug(slug)
 	if post:
-		return render("post.tpl", post=post, tags="".join(post.tags, ", "))
+		return render("post.tpl", post=post)
 	else:
 		return redirect(url_for('index'))
 
@@ -66,10 +69,22 @@ def page_not_found(error):
 	return error, 404
 
 # API
+
+@app.route('/json')
 @app.route('/json/<int:limit>')
 def json(limit=10):
-	#todo
-	return "todo"
+	posts = model.get_all_posts(limit)
+	to_json = []
+	for post in posts:
+		entry = {}
+		entry['title'] = post.title
+		entry['slug'] = post.slug
+		entry['author'] = post.author
+		entry['when'] = post.when.strftime("%d %b %Y %I:%M:%S %p") 
+		entry['content'] = post.content
+		entry['tags'] = post.tags
+		to_json.append(entry)
+	return JSONEncoder().encode(entry)
 
 @app.route('/rss/<int:limit>')
 def rss(limit=10):

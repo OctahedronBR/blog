@@ -11,6 +11,7 @@ def create_post(form):
 		slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0] # ternary operation, python 2.4
 		tags = form['tags'].split(",")
 		post = Post(title=form['title'], slug=slug, content=form['content'], tags=tags, author=users.get_current_user())
+#		post = Post(title=form['title'], slug=slug, content=form['content'], tags=tags, author="danilo") # to be used on tests
 		post.put()
 		return post
 	except:
@@ -30,8 +31,10 @@ def update_post(form):
 	else:
 		return false
 
-def get_all_posts():
-	return Post.all().fetch(5)
+def get_all_posts(size=5):
+	query = Post.all()
+	query.order('-when')
+	return query.fetch(size)
 
 def get_post_by_key(key):
 	return Post.all().filter("__key__ =", Key(key)).get()
@@ -47,4 +50,5 @@ class Post(db.Model):
     when = db.DateTimeProperty(auto_now_add = True)
     tags = db.StringListProperty()
     author = db.UserProperty(required = True)
+#    author = db.StringProperty(required = True) # to be used on tests
 

@@ -19,7 +19,7 @@ def render(template_name, **args):
 
 _slugify_strip_re = re.compile(r'[^\w\s-]')
 _slugify_hyphenate_re = re.compile(r'[-\s]+')
+
 def slugify(value):
 	value = _slugify_strip_re.sub('', value).strip().lower()
 	return _slugify_hyphenate_re.sub('-', value)
-

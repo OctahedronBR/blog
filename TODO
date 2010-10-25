@@ -1,7 +1,6 @@
 Tags / falta listar posts por tag
+Paginar posts 
 UI / Rich Editor BBCode
 RSS
-JSON
 BBcode render / strip html code before safe at database
-MultiBlogs
 Integração com twitter (http://joshthecoder.github.com/tweepy/)
