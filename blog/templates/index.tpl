@@ -5,7 +5,7 @@
 			<li>
 				<div id="post">
 					<h3><a href="/{{ post.slug }}" id="post">{{ post.title }}</a></h3>
-					<p>{{ post.content }}</p>
+					<p>{{ post.html_content }}</p>
 				</div>
 			</li>
 		</ul>

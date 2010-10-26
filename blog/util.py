@@ -22,6 +22,15 @@ def render(template_name, **args):
 _slugify_strip_re = re.compile(r'[^\w\s-]')
 _slugify_hyphenate_re = re.compile(r'[-\s]+')
 
+_html_code_re = re.compile(r'<[\w ="/]+>')
+_html_accent_re = re.compile(r'&[a-zA-Z]+')
+
 def slugify(value):
 	value = _slugify_strip_re.sub('', value).strip().lower()
 	return _slugify_hyphenate_re.sub('-', value)
+
+def strip_html_code(value):
+	return _html_accent_re.sub('', _html_code_re.sub('', value))
+
+def bbcode_to_html(value):
+	return value # TODO implement

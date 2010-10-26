@@ -1,8 +1,7 @@
 from google.appengine.ext import db
 from google.appengine.ext.db import Key
 from google.appengine.api import users
-from blog import app
-from blog.util import slugify
+from blog.util import slugify, strip_html_code, bbcode_to_html
 import traceback
 
 # Facade
@@ -10,8 +9,10 @@ def create_post(form):
 	try:
 		slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0] # ternary operation, python 2.4
 		tags = form['tags'].split(",")
-		post = Post(title=form['title'], slug=slug, content=form['content'], tags=tags, author=users.get_current_user())
-#		post = Post(title=form['title'], slug=slug, content=form['content'], tags=tags, author="danilo") # to be used on tests
+		post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user())
+		post.coded_content = strip_html_code(form['content'])
+		post.html_content = bbcode_to_html(post.coded_content)
+		post
 		post.put()
 		# adicionar ao memcache por slug, key, tag
 		# remover memcache allposts
@@ -26,14 +27,15 @@ def update_post(form):
 		post.title = form['title']
 		post.tags = form['tags'].split(",")
 		post.slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0]
-		post.content = form['content']
+		post.coded_content = strip_html_code(form['content'])
+		post.html_content = bbcode_to_html(post.coded_content)
 		post.put() #todo: try, catch
 		# adicionar ao memcache por slug
 		# remover memcache allposts
 
 		return post
 	else:
-		return false
+		return False
 
 def get_all_posts(size=5):
 	# recuperar posts do memcache se houver (class + size)
@@ -76,13 +78,13 @@ def get_config():
 
 # Classes
 class Post(db.Model):
-    title = db.StringProperty(required = True)
-    slug = db.StringProperty(required = True)
-    content = db.TextProperty(required = True)
-    when = db.DateTimeProperty(auto_now_add = True)
-    tags = db.StringListProperty()
-#    author = db.UserProperty(required = True)
-    author = db.StringProperty(required = True) # to be used on tests
+	title = db.StringProperty(required = True)
+	slug = db.StringProperty(required = True)
+	coded_content = db.TextProperty(required = True)
+	html_content = db.TextProperty(required = True)
+	when = db.DateTimeProperty(auto_now_add = True)
+	tags = db.StringListProperty()
+	author = db.UserProperty(required = True)
 
 class Config(db.Model):
 	blogname = db.StringProperty()

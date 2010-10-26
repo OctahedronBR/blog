@@ -9,7 +9,7 @@
 			<input type="text" name="slug" value="{{ post.slug }}" />
 			<button id="slugify">Slugify!</button> <br />
 			<label for="content">Conteúdo</label> <br />
-			<textarea type="text" name="content">{{ post.content }}</textarea> <br />
+			<textarea type="text" name="content">{{ post.coded_content }}</textarea> <br />
 			<label for="tags">Tags</label> <br />
 			<input type="text" name="tags" value="{{ tags }}"/> <br />
 			<input id="submit" type="submit" value="Atualizar" />
