@@ -63,8 +63,7 @@ def configure(form):
 	config.lang = form['lang']
 	
 	#adjust url
-	config.url = config.url.lstrip()
-	config.url = config.url.rstrip()
+	config.url = config.url.strip()
 	if not config.url.endswith('/'):
 		config.url += '/'
 		
