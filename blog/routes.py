@@ -15,7 +15,7 @@ def before_request():
 
 
 @app.route('/config')
-#@login_required
+@login_required
 def create_config():
 	if model.get_config():
 		return redirect(url_for('edit_config'))
@@ -23,13 +23,13 @@ def create_config():
 		return render("create_config.tpl")
 
 @app.route('/config/edit')
-#@login_required
+@login_required
 def edit_config():
 	return render("config.tpl")
 
 
 @app.route('/config/save', methods=['POST'])
-#@login_required
+@login_required
 def configure():
 	model.configure(request.form)
 	return redirect(url_for('edit_config'))

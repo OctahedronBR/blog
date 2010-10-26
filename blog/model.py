@@ -9,10 +9,9 @@ def create_post(form):
 	try:
 		slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0] # ternary operation, python 2.4
 		tags = form['tags'].split(",")
-		post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user())
-		post.coded_content = strip_html_code(form['content'])
-		post.html_content = bbcode_to_html(post.coded_content)
-		post
+		striped = strip_html_code(form['content'])
+		html = bbcode_to_html(striped)
+		post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user(), coded_content = striped, html_content = html)
 		post.put()
 		# adicionar ao memcache por slug, key, tag
 		# remover memcache allposts
@@ -53,7 +52,7 @@ def get_post_by_slug(slug):
 
 def get_posts_by_tag(tag, size = 5):
 	# recuperar do memcache
-	return Post.all().filter("tag =", tag).fetch(size)
+	return Post.all().filter("tags =", tag).fetch(size)
 
 def configure(form):
 	config = Config.all().get()
