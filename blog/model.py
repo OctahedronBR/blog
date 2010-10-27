@@ -7,7 +7,7 @@ import traceback
 # Facade
 def create_post(form):
 	try:
-		slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0] # ternary operation, python 2.4
+		slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
 		tags = form['tags'].split(",")
 		striped = strip_html_code(form['content'])
 		html = bbcode_to_html(striped)
@@ -25,7 +25,7 @@ def update_post(form):
 	if post:
 		post.title = form['title']
 		post.tags = form['tags'].split(",")
-		post.slug = (slugify(form['title']), form['slug'])[len(form['slug']) > 0]
+		post.slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
 		post.coded_content = strip_html_code(form['content'])
 		post.html_content = bbcode_to_html(post.coded_content)
 		post.put() #todo: try, catch
@@ -62,16 +62,16 @@ def configure(form):
 	config.url = form['url']
 	config.desc = form['desc']
 	config.lang = form['lang']
-	
+
 	#adjust url
 	config.url = config.url.strip()
 	if not config.url.endswith('/'):
 		config.url += '/'
-		
+
 	config.put()
 	# atualizar memcache
-	
-def get_config(): 
+
+def get_config():
 	# recuperar do memcache
 	return Config.all().get()
 
@@ -90,3 +90,4 @@ class Config(db.Model):
 	url = db.StringProperty()
 	desc = db.StringProperty()
 	lang = db.StringProperty()
+
