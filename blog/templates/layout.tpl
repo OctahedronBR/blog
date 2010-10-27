@@ -11,68 +11,8 @@
 	</head>
 	<body>
 		<div id="content">
-			<div id="posts" class="left">
+			<div id="main" class="left">
 				{% block body %}{% endblock %}
-				<div class="post">
-					<h2><a href="/">_Título do post</a></h2>
-					<h3>_Publicado em 00/00/0000 por Fulano</h3>
-					<div id="content">
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-					</div>
-					<div id="footer">
-						<ul>
-							<li>_Tags:</li>
-							<li><a href="/tag/oi">oi</a></li>
-							<li><a href="/tag/oi">oi</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="post">
-					<h2><a href="/">_Título do post</a></h2>
-					<h3>_Publicado em 00/00/0000 por Fulano</h3>
-					<div id="content">
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-					</div>
-					<div id="footer">
-						<ul>
-							<li>_Tags:</li>
-							<li><a href="/tag/oi">oi</a></li>
-							<li><a href="/tag/oi">oi</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="post">
-					<h2><a href="/">_Título do post</a></h2>
-					<h3>_Publicado em 00/00/0000 por Fulano</h3>
-					<div id="content">
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-					</div>
-					<div id="footer">
-						<ul>
-							<li>_Tags:</li>
-							<li><a href="/tag/oi">oi</a></li>
-							<li><a href="/tag/oi">oi</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="post">
-					<h2><a href="/">_Título do post</a></h2>
-					<h3>_Publicado em 00/00/0000 por Fulano</h3>
-					<div id="content">
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-						<p>Foi neste cenário, convictos de que a computação na nuvem representa um novo paradigma para a computação, e decididos a participarem deste momento, que <strong>Danilo Queiroz</strong> e <strong>Vítor Avelino</strong> fundaram, em meados de 2010, a Octahedron - uma empresa especializada no desenvolvimento de aplicações na nuvem.</p>
-					</div>
-					<div id="footer">
-						<ul>
-							<li>_Tags:</li>
-							<li><a href="/tag/oi">oi</a></li>
-							<li><a href="/tag/oi">oi</a></li>
-						</ul>
-					</div>
-				</div>
 			</div>
 			<div id="sidebar" class="right">
 				<div id="header">
@@ -88,6 +28,7 @@
 				</div>
 				<hr />
 				<div id="links">
+					<h2>_Links</h2>
 					<ul>
 						<li><a href="">link1</a></li>
 						<li><a href="">link1</a></li>
@@ -97,8 +38,12 @@
 						<li><a>link1</a></li>
 					</ul>
 				</div>
+			</div>  <!-- sidebar -->
+			<div id="footer">
+				<p>Posts mais antigos</p>
 			</div>
-		</div>
+		</div> <!-- content -->
+		{% block scripts %}{% endblock %}
 	</body>
 </html>
 
