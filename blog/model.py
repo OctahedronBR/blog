@@ -8,13 +8,12 @@ import traceback
 def create_post(form):
 	slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
 	tags = form['tags'].split(",") if (len(form['tags']) > 0) else []
-	print tags
 	striped = strip_html_code(form['content'])
 	html = bbcode_to_html(striped)
 	post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user(), coded_content=striped, html_content=html)
 	post.put() #todo: try, catch
 	memcache.set_multi({str(post.key()): post, post.slug: post})
-	memcache.delete('index_view', 'all_posts_5')
+	memcache.delete_multi(['index_view', 'all_posts_5'])
 	update_sitemap()
 	# remover memcache tag
 
@@ -27,7 +26,7 @@ def update_post(form):
 	if post.slug != slugify(form['slug']):
 		memcache.delete_multi([post.slug, post.slug+'_view'], namespace=namespace_manager.get_namespace())
 	post.title = form['title']
-	post.tags = form['tags'].split(",") if (len(form['tags']) > 0) else None
+	post.tags = form['tags'].split(",") if (len(form['tags']) > 0) else []
 	post.slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
 	post.coded_content = strip_html_code(form['content'])
 	post.html_content = bbcode_to_html(post.coded_content)
@@ -106,6 +105,7 @@ def update_sitemap():
 	sitemap.content = render('sitemap.tpl', posts=get_all_posts())
 	sitemap.put()
 	memcache.set('sitemap', sitemap)
+	memcache.delete('sitemap_view')
 	# submit to Google Webmaster Tools
 
 # Classes
