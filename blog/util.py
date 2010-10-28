@@ -14,10 +14,10 @@ def login_required(func):
 	return decorated_view
 
 # Other
-def render(template_name, **args):
+def render(template_name, **kwargs):
 	user = users.get_current_user()
 	config = model.get_config()
-	return render_template(template_name, config=config, user=user, **args)
+	return render_template(template_name, config=config, user=user, **kwargs)
 
 _slugify_strip_re = re.compile(r'[^\w\s-]')
 _slugify_hyphenate_re = re.compile(r'[-\s]+')
@@ -34,3 +34,4 @@ def strip_html_code(value):
 
 def bbcode_to_html(value):
 	return value # TODO implement
+

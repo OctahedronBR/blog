@@ -19,7 +19,9 @@
 		</div>
 	</div>
 	{% else %}
-		<p>Nenhum post.</p>
+	<div class="section">
+		<h2>Nenhum post {% if user %}[<a href="/post/new" id="new">Criar</a>]{% endif %}</h2>
+	</div>
 	{% endfor %}
 {% endblock %}
 

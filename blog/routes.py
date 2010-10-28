@@ -1,10 +1,10 @@
 from StringIO import StringIO
-from flask import render_template, url_for, request, redirect
+from flask import url_for, request, redirect, make_response, abort
 from simplejson.encoder import JSONEncoder
 from blog import app, model
 from blog.model import Post, Config
 from blog.util import render, login_required, slugify
-from google.appengine.api import users, namespace_manager
+from google.appengine.api import users, namespace_manager, memcache
 import feedgenerator
 
 # MISC #
@@ -18,16 +18,29 @@ def index():
 	if not model.get_config():
 		return redirect(url_for('new_config'))
 	else:
-		return render("index.tpl", posts=model.get_all_posts())
+		page = memcache.get('index_view')
+		if not page:
+			page = render("index.tpl", posts=model.get_all_posts())
+			memcache.set('index_view', page)
+		return page
 
 @app.route('/login')
 def login():
+	memcache.delete('index_view')
 	return redirect(users.create_login_url(url_for('index')))
+
+@app.route('/logout')
+def logout():
+	memcache.delete('index_view')
+	return redirect(users.create_logout_url(url_for('index')))
 
 @app.errorhandler(404)
 def page_not_found(error):
-	# todo
-	return error, 404
+	page = memcache.get('error_view')
+	if not page:
+		page = render('not_found.tpl')
+		memcache.set('error_view', page)
+	return page, 404
 
 # CONFIG BEGIN #
 @app.route('/config/new')
@@ -47,14 +60,18 @@ def edit_config():
 @login_required
 def configure():
 	model.configure(request.form)
-	return redirect(url_for('edit_config'))
+	return redirect(url_for('index'))
 # CONFIG END #
 
 # POST BEGIN #
 @app.route('/post/new')
 @login_required
 def new_post():
-	return render("post_new.tpl")
+	page = memcache.get('post_new_view')
+	if not page:
+		page = render("post_new.tpl")
+		memcache.set('post_new_view', page)
+	return page
 
 @app.route('/post/create', methods=['POST'])
 @login_required
@@ -84,15 +101,18 @@ def update_post():
 		return redirect(url_for('slug', slug=post.slug))
 	else:
 		# todo: error message
-		return redirect(url_for('index'))
+		return redirect(url_for('edit_post', key=post.key()))
 
 @app.route('/<slug>')
 def slug(slug):
-	post = model.get_post_by_slug(slug)
-	if post:
-		return render("post_view.tpl", post=post)
-	else:
-		return redirect(url_for('index'))
+	page = memcache.get(slug+'_view')
+	if not page:
+		post = model.get_post_by_slug(slug)
+		if not post:
+			return abort(404)
+		page = render("post_view.tpl", post=post)
+		memcache.set(slug+'_view', page)
+	return page
 
 @app.route('/tag/<tag>')
 def tag(tag):
@@ -101,6 +121,16 @@ def tag(tag):
 # POST END #
 
 # API BEGIN #
+@app.route('/sitemap.xml')
+def sitemap():
+	sitemap = memcache.get('sitemap_view')
+	if not sitemap:
+		sitemap = model.get_sitemap().content
+		memcache.set('sitemap_view', sitemap)
+	response = make_response(sitemap)
+	response.headers['Content-Type'] = 'text/xml'
+	return response
+
 @app.route('/json')
 @app.route('/json/<int:limit>')
 def json(limit=10):

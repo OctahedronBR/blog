@@ -1,5 +1,8 @@
 Paginar posts (usar offset ou cursor?)
-Memcache
 UI / Rich Editor BBCode
 BBcode render / strip html code before safe at database
+Memcache por tag
 Integração com twitter (http://joshthecoder.github.com/tweepy/)
+Pingar Google Webmaster Tools sobre novo sitemap.xml
+Refatorar response como xml, json
+

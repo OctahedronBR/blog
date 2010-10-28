@@ -45,7 +45,7 @@ div#main h2 {color: #cce7d4; padding: 7px 10px; background-color: #70694a;}
 div#main h2 a {color: #cce7d4;}
 div#main h2 a:hover {color: #a29979;}
 
-.post, .section {margin: 30px 0 0; padding: 10px 0 15px; background: rgba(255, 255, 255, 0.7); -moz-box-shadow: -5px 0px 15px #999; -webkit-box-shadow: -5px 0px 15px #999; box-shadow: -5px 0px 15px #999;}
+.post, .section {margin: 30px 0 0; padding: 10px 0 10px; background: rgba(255, 255, 255, 0.7); -moz-box-shadow: -5px 0px 15px #999; -webkit-box-shadow: -5px 0px 15px #999; box-shadow: -5px 0px 15px #999;}
 
 .section .margin {margin: 10px 10px 0;}
 
@@ -67,8 +67,8 @@ div#sidebar #header {text-align: center;}
 .search input {border: none;}
 
 div#sidebar h2 {color: #cce7d4;}
-div#sidebar #links ul {margin: 5px 0 0 10px;}
-div#sidebar #links ul li {padding: 2px 3px;}
-div#sidebar #links ul li a {padding: 2px 3px; color: #a29979;}
-div#sidebar #links ul li a:hover {background-color: #cce7d4; color: #70694a;}
+div#sidebar ul {margin: 5px 0 0 10px;}
+div#sidebar ul li {padding: 3px 3px;}
+div#sidebar ul li a {padding: 2px 3px; color: #a29979;}
+div#sidebar ul li a:hover {background-color: #cce7d4; color: #70694a;}
 

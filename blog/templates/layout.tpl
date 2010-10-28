@@ -15,13 +15,15 @@
 				{% block body %}{% endblock %}
 			</div>
 			<div id="sidebar" class="right">
+				<hr />
 				<div id="header">
 					<a href="/"><img alt="Octahedron" src="/static/images/logo.png" /></a><br />
 				</div>
 				<hr />
 				<div class="search">
-					<form action="/search" method="get">
+					<form action="http://www.google.com/search" method="get">
 						<fieldset>
+							<input type="hidden" name="sitesearch" value="{{ config.url }}" />
 							<input type="text" name="q" />
 						</fieldset>
 					</form>
@@ -30,12 +32,22 @@
 				<div id="links">
 					<h2>_Links</h2>
 					<ul>
-						<li><a href="">link1</a></li>
-						<li><a href="">link1</a></li>
-						<li><a href="">link1</a></li>
-						<li><a href="">link1</a></li>
-						<li><a>link1</a></li>
-						<li><a>link1</a></li>
+						<li><a href="" target="_blank">Open Cloud Manifest</a></li>
+						<li><a href="" target="_blank">Cloudmit</a></li>
+						<li><a href="" target="_blank">Google App Engine</a></li>
+					</ul>
+				</div>
+				<hr />
+				<div id="access">
+					<h2>_Admin</h2>
+					<ul>
+						{% if user %}
+						<li><a href="/logout">Logout</a></li>
+						<li><a href="/post/new">Criar post</a></li>
+						<li><a href="#">Editar links</a>[TODO]</li>
+						{% else %}
+						<li><a href="/login">Login</a></li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>  <!-- sidebar -->
