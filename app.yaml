@@ -4,5 +4,13 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+
 - url: .*
   script: main.py
+
+builtins:
+- datastore_admin: on
+- appstats: on
+
