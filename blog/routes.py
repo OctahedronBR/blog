@@ -60,7 +60,24 @@ def edit_config():
 @login_required
 def configure():
 	model.configure(request.form)
-	return redirect(url_for('index'))
+	return render("config_edit.tpl", saved=True)
+
+@app.route('/config/add_link')
+@login_required
+def add_link():
+	return render("add_link.tpl")
+
+@app.route('/config/add_link', methods=['POST'])
+@login_required
+def save_link():
+	model.add_link(request.form)
+	return redirect(url_for('edit_config'))
+
+@app.route('/config/remove_link/<link_name>')
+@login_required
+def remove_link(link_name):
+	model.remove_link(link_name)
+	return redirect(url_for('edit_config'))
 # CONFIG END #
 
 # POST BEGIN #

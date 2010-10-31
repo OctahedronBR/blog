@@ -68,7 +68,7 @@ def configure(form):
 	if not config:
 		config = Config()
 	config.blogname = form['url']
-	config.url = form['url']
+	config.url = db.Link(form['url'])
 	config.desc = form['desc']
 	config.lang = form['lang']
 
@@ -79,6 +79,16 @@ def configure(form):
 
 	config.put()
 	memcache.set('config', config)
+
+def add_link(form):
+	name = form['name']
+	url = db.Link(form['url'])
+	link = Link(name=name, url=url, blog=get_config())
+	link.put()
+
+def remove_link(name):
+	links = Link.all().filter('name =', name).fetch(100)
+	db.delete(links)
 
 def get_config():
 	config = memcache.get('config')
@@ -120,9 +130,14 @@ class Post(db.Model):
 
 class Config(db.Model):
 	blogname = db.StringProperty()
-	url = db.StringProperty()
+	url = db.LinkProperty()
 	desc = db.StringProperty()
 	lang = db.StringProperty()
+
+class Link(db.Model):
+	name = db.StringProperty(required=True)
+	url = db.LinkProperty(required=True)
+	blog = db.ReferenceProperty(Config, collection_name='links')
 
 class Sitemap(db.Model):
 	content = db.TextProperty()

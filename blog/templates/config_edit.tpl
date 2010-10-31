@@ -1,5 +1,8 @@
 {% extends "layout.tpl" %}
 {% block body %}
+	{% if save %}
+	<div class="message"><h2>Configuration Saved</h2></div>
+	{% endif %}
 	<div class="section">
 		<h2>Configuração</h2>
 		<div class="margin">
@@ -17,6 +20,15 @@
 					<input id="submit" type="submit" value="Salvar" />
 				</fieldset>
 			</form>
+			<br/>
+			<h3>Links</h3>
+			<ul>
+			{% for link in config.links %}
+			<li> {{link.name}} - {{link.url}} - <a href="/config/remove_link/{{link.name}}">remove</a></li>
+			{% endfor %}
+			</ul>
+			<br/>
+			<p><a href="/config/add_link">Adicionar novo link</a></p>
 		</div>
 	</div>
 {% endblock %}

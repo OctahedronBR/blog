@@ -32,9 +32,9 @@
 				<div id="links">
 					<h2>_Links</h2>
 					<ul>
-						<li><a href="" target="_blank">Open Cloud Manifest</a></li>
-						<li><a href="" target="_blank">Cloudmit</a></li>
-						<li><a href="" target="_blank">Google App Engine</a></li>
+					{% for link in config.links%}
+						<li><a href="{{link.url}}" target="_blank">{{link.name}}</a></li>
+					{% endfor %}
 					</ul>
 				</div>
 				<hr />
