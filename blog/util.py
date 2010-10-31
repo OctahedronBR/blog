@@ -3,6 +3,7 @@ import model
 from google.appengine.api import users
 from flask import redirect, request, render_template
 import re
+from postmarkup import render_bbcode
 
 # Decorators
 def login_required(func):
@@ -33,5 +34,5 @@ def strip_html_code(value):
 	return _html_accent_re.sub('', _html_code_re.sub('', value))
 
 def bbcode_to_html(value):
-	return value # TODO implement
+	return render_bbcode(value)
 
