@@ -1,6 +1,6 @@
 {% extends "layout.tpl" %}
 {% block body %}
-	{% if save %}
+	{% if saved %}
 	<div class="message"><h2>Configuration Saved</h2></div>
 	{% endif %}
 	<div class="section">

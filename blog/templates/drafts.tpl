@@ -2,7 +2,7 @@
 {% block body %}
 	{% for post in posts %}
 	<div class="post">
-		<h2><a href="/{{ post.slug }}">{{ post.title }}</a> {% if user %}[<a href="/post/edit/{{ post.key() }}" id="edit">Editar</a> | <a href="/remove/{{ post.key() }}" id="edit">Remover</a>]{% endif %}</h3>
+	<h2>{{ post.title }}</a> [<a href="/post/edit/{{ post.key() }}" id="edit">Editar</a> | <a href="/publish/{{ post.key() }}" id="edit">Publicar</a> | <a href="/remove/{{ post.key() }}" id="edit">Remover</a>]</h3>
 		<h3>_Publicado em {{ post.when.strftime("%d/%m/%Y") }} por {{ post.author.nickname() }}</h3>
 		<div id="text">
 			<p>{{ post.html_content }}</p>

@@ -17,5 +17,10 @@ import settings
 
 app = Flask('blog')
 app.config.from_object('blog.settings')
+
+# install event recorder for appstats application
+from google.appengine.ext.appstats import recording
+fullapp = recording.appstats_wsgi_middleware(app)
+
 import routes
 

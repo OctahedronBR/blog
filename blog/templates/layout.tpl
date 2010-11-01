@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
 
-		<title>Octahedron - Blog</title>
+		<title>{{config.blogname}}</title>
 	</head>
 	<body>
 		<div id="content">
@@ -17,7 +17,7 @@
 			<div id="sidebar" class="right">
 				<hr />
 				<div id="header">
-					<a href="/"><img alt="Octahedron" src="/static/images/logo.png" /></a><br />
+					<a href="{{config.url}}"><img alt="Octahedron" src="/static/images/logo.png" /></a><br />
 				</div>
 				<hr />
 				<div class="search">
@@ -44,7 +44,8 @@
 						{% if user %}
 						<li><a href="/logout">Logout</a></li>
 						<li><a href="/post/new">Criar post</a></li>
-						<li><a href="#">Editar links</a>[TODO]</li>
+						<li><a href="/drafts">Rascunhos</a></li>
+						<li><a href="/config/edit">Editar configurações</a></li>
 						{% else %}
 						<li><a href="/login">Login</a></li>
 						{% endif %}

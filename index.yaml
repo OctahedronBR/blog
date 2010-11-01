@@ -2,5 +2,6 @@ indexes:
 
 - kind: Post
   properties:
+  - name: as_draft
   - name: when
     direction: desc

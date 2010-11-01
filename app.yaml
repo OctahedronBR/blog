@@ -7,8 +7,19 @@ handlers:
 - url: /stats.*
   script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
 
+- url: /admin/.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  login: admin
+
 - url: .*
   script: main.py
+
+admin_console:
+  pages:
+  - name: My Console
+    url: /admin/interactive
+  - name: My Memcache
+    url: /admin/memcache
 
 builtins:
 - datastore_admin: on

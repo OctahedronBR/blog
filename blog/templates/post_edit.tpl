@@ -15,6 +15,7 @@
 					<textarea type="text" name="content" class="large-width">{{ post.coded_content }}</textarea> <br />
 					<label for="tags">Tags</label> <br />
 					<input type="text" name="tags" value="{{ tags }}" class="normal-width"/> <br />
+					<input type="checkbox" name="draft" value=True {% if draft %}checked{% endif %}>Rascunho<br/>
 					<input id="submit" type="submit" value="Atualizar" />
 				</fieldset>
 			</form>

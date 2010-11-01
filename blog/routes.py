@@ -18,20 +18,15 @@ def index():
 	if not model.get_config():
 		return redirect(url_for('new_config'))
 	else:
-		page = memcache.get('index_view')
-		if not page:
-			page = render("index.tpl", posts=model.get_all_posts())
-			memcache.set('index_view', page)
+		page = render("index.tpl", posts=model.get_all_posts())
 		return page
 
 @app.route('/login')
 def login():
-	memcache.delete('index_view')
 	return redirect(users.create_login_url(url_for('index')))
 
 @app.route('/logout')
 def logout():
-	memcache.delete('index_view')
 	return redirect(users.create_logout_url(url_for('index')))
 
 @app.errorhandler(404)
@@ -54,7 +49,7 @@ def new_config():
 @app.route('/config/edit')
 @login_required
 def edit_config():
-	return render("config_edit.tpl")
+	return render("config_edit.tpl", saved=False)
 
 @app.route('/config/save', methods=['POST'])
 @login_required
@@ -95,7 +90,10 @@ def new_post():
 def create_post():
 	post = model.create_post(request.form)
 	if post:
-		return redirect(url_for('slug', slug=post.slug))
+		if post.as_draft:
+			return redirect(url_for('drafts'))
+		else:
+			return redirect(url_for('slug', slug=post.slug))
 	else:
 		# todo: error message
 		return redirect(url_for('new_post'))
@@ -105,7 +103,10 @@ def create_post():
 def edit_post(key):
 	post = model.get_post_by_key(key)
 	if post:
-		return render("post_edit.tpl", post=post, tags=",".join(post.tags))
+		if post.as_draft:
+			return render("post_edit.tpl", post=post, draft=True, tags=",".join(post.tags))
+		else:
+			return render("post_edit.tpl", post=post,tags=",".join(post.tags))
 	else:
 		# todo: error message
 		return redirect(url_for('index'))
@@ -115,20 +116,39 @@ def edit_post(key):
 def update_post():
 	post = model.update_post(request.form)
 	if post:
-		return redirect(url_for('slug', slug=post.slug))
+		if post.as_draft:
+			return redirect(url_for('drafts'))
+		else:
+			return redirect(url_for('slug', slug=post.slug))
 	else:
 		# todo: error message
 		return redirect(url_for('edit_post', key=post.key()))
 
+
+@app.route('/drafts')
+@login_required
+def drafts():
+	page = render("drafts.tpl", posts=model.get_all_drafts())
+	return page
+
+@app.route('/remove/<key>')
+@login_required
+def remove(key):
+	model.delete_post(key)
+	return redirect(url_for('index'))
+
+@app.route('/publish/<key>')
+@login_required
+def publish(key):
+	model.publish_draft(key)
+	return redirect(url_for('index'))
+
 @app.route('/<slug>')
 def slug(slug):
-	page = memcache.get(slug+'_view')
-	if not page:
-		post = model.get_post_by_slug(slug)
-		if not post:
-			return abort(404)
-		page = render("post_view.tpl", post=post)
-		memcache.set(slug+'_view', page)
+	post = model.get_post_by_slug(slug)
+	if not post:
+		return abort(404)
+	page = render("post_view.tpl", post=post)
 	return page
 
 @app.route('/tag/<tag>')

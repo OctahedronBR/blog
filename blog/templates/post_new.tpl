@@ -14,6 +14,7 @@
 					<textarea name="content" class="large-width"></textarea> <br />
 					<label for="tags">Tags (e.g.: cloud computing, appengine, python)</label> <br />
 					<input type="text" name="tags" class="normal-width"/> <br />
+					<input type="checkbox" name="draft" value=True>Rascunho<br/>
 					<input id="submit" type="submit" value="Criar" />
 				</fieldset>
 			</form>
