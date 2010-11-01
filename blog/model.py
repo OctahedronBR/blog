@@ -41,7 +41,7 @@ def create_post(form):
 	html = bbcode_to_html(striped)
 	post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user(), coded_content=striped, html_content=html, as_draft=as_draft)
 	post.put() 
-	memcache.set_multi({str(post.key()): post})
+	memcache.set(str(post.key()), post)
 	memcache.delete_multi(['all_posts_10', 'all_drafts_10'])
 	update_sitemap()
 	return post
@@ -65,7 +65,7 @@ def update_post(form):
 	post.as_draft = form.has_key('draft')	
 	post.put() #todo: try, catch
 	memcache.set(str(post.key()), post)
-	memcache.delete_multi(['all_posts_10','all_drafts_10'])
+	memcache.delete_multi(['all_posts_10','all_drafts_10', post.slug])
 	update_sitemap()
 	# remover memcache tag
 	return post
@@ -77,7 +77,7 @@ def delete_post(key):
 	"""
 	post = get_post_by_key(key)
 	db.delete(post)
-	memcache.delete_multi(['all_posts_10','all_drafts_10',str(post.key())])
+	memcache.delete_multi(['all_posts_10','all_drafts_10',str(post.key()), post.slug])
 
 def publish_draft(key):
 	"""
