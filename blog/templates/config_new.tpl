@@ -12,7 +12,7 @@
 					<input type="text" name="url" class="normal-width"/> <br />
 					<label for="desc">Descrição</label> <br />
 					<textarea name="desc" class="normal-width"></textarea> <br />
-					<label for="lang">Lingua</label> <br />
+					<label for="lang">Língua [use 'en', 'pt_BR', ...]</label> <br />
 					<input type="text" name="lang" class="tiny-width"/> <br />
 					<input id="submit" type="submit" value="Salvar" />
 				</fieldset>

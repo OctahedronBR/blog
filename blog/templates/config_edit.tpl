@@ -1,12 +1,9 @@
-{% extends "layout.tpl" %}
+	{% extends "layout.tpl" %}
 {% block body %}
-	{% if saved %}
-	<div class="message"><h2>Configuration Saved</h2></div>
-	{% endif %}
 	<div class="section">
 		<h2>Configuração</h2>
 		<div class="margin">
-			<p class="warning"></p>
+			<p class="warning">{% if saved %}<strong>Configuration Saved</strong>{% endif %}</p>
 			<form action="/config/save" method="post">
 				<fieldset>
 					<label for="blogname">Nome do Blog</label> <br />
@@ -15,7 +12,7 @@
 					<input type="text" name="url" value="{{ config.url }}" class="normal-width"/> <br />
 					<label for="desc">Descrição</label> <br />
 					<textarea name="desc" class="normal-width">{{ config.desc }}</textarea> <br />
-					<label for="lang">Lingua</label> <br />
+					<label for="lang">Língua [use 'en', 'pt_BR', ...]</label> <br />
 					<input type="text" name="lang" value="{{ config.lang }}" class="tiny-width"/> <br />
 					<input id="submit" type="submit" value="Salvar" />
 				</fieldset>

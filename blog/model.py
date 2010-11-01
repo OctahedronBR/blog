@@ -1,3 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+    Octa Blog - Simple blog engine build to run at Google App Engine
+    Copyright (C) 2010  Octahedron
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+    @author Danilo Penna Queiroz [daniloqueiroz@octahehedron.com.br]
+    @author Vítor Avelino Dutra Magalhães [vitoravelino@octahedron.com.br]
+"""
+
 from google.appengine.ext import db
 from google.appengine.ext.db import Key
 from google.appengine.api import users, memcache, namespace_manager
@@ -6,6 +29,11 @@ import traceback
 
 # Facade
 def create_post(form):
+	"""
+	Creates and saves a new post.
+	When a post is created, it's put at cache (by key) and the cache for all posts/drafts
+	is cleaned.
+	"""
 	slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
 	tags = form['tags'].split(",") if (len(form['tags']) > 0) else []
 	striped = strip_html_code(form['content'])
@@ -14,11 +42,16 @@ def create_post(form):
 	post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user(), coded_content=striped, html_content=html, as_draft=as_draft)
 	post.put() 
 	memcache.set_multi({str(post.key()): post})
-	memcache.delete_multi(['all_posts_5', 'all_drafts_5'])
+	memcache.delete_multi(['all_posts_10', 'all_drafts_10'])
 	update_sitemap()
 	return post
 
 def update_post(form):
+	"""
+	Updates an existent post. Post is identified by it unique key
+	When a post is updated, it's put at cache (by key) and the cache for all posts/drafts
+	is cleaned.
+	"""
 	post = memcache.get(form['key'])
 	if not post:
 		post = Post.all().filter('__key__ =', Key(form['key'])).get()
@@ -32,37 +65,62 @@ def update_post(form):
 	post.as_draft = form.has_key('draft')	
 	post.put() #todo: try, catch
 	memcache.set(str(post.key()), post)
-	memcache.delete_multi(['all_posts_5','all_drafts_5'])
+	memcache.delete_multi(['all_posts_10','all_drafts_10'])
 	update_sitemap()
 	# remover memcache tag
 	return post
 
 def delete_post(key):
+	"""
+	Deletes the post with the given key.
+	The post is also removed from cache
+	"""
 	post = get_post_by_key(key)
 	db.delete(post)
-	memcache.delete_multi(['all_posts_5','all_drafts_5',str(post.key())])
+	memcache.delete_multi(['all_posts_10','all_drafts_10',str(post.key())])
 
 def publish_draft(key):
+	"""
+	Removes 'as_draft' mark from the post with the given key
+	Cache adjusted
+	"""
 	draft = get_post_by_key(key)
 	draft.as_draft = False
 	draft.put()
-	memcache.delete_multi(['all_posts_5','all_drafts_5',str(draft.key())])
+	memcache.delete_multi(['all_posts_10','all_drafts_10',str(draft.key())])
 
-def get_all_posts(size=5):
+def get_all_posts(size=10):
+	"""
+	Gets all published posts.
+	""" 
 	posts = memcache.get('all_posts_'+str(size))
 	if not posts:
-		posts = Post.all().filter("as_draft !=", True).order('as_draft').order('as_draft').order('-when').fetch(size)
+		posts = Post.all().filter("as_draft =", False).order('as_draft').order('-when').fetch(size)
 		memcache.set('all_posts_'+str(size), posts)
 	return posts
 
-def get_all_drafts(size=5):
+def get_all_drafts(size=10):
+	"""
+	Gets all draft posts
+	"""
 	drafts = memcache.get('all_drafts_'+str(size))
 	if not drafts:
 		drafts = Post.all().filter("as_draft =", True).order('-when').fetch(size)
 		memcache.set('all_drafts_'+str(size), drafts)
 	return drafts
 
+def get_posts_by_tag(tag, size=10):
+	"""
+	Gets all published post with a given tag
+	"""
+	# recuperar do memcache
+	return Post.all().filter('tags =', tag).filter("as_draft =", False).fetch(size)
+
+
 def get_post_by_key(key):
+	"""
+	Gets a post by key
+	"""
 	post = memcache.get(key)
 	if not post:
 		post = Post.all().filter('__key__ =', Key(key)).get()
@@ -70,17 +128,19 @@ def get_post_by_key(key):
 	return post
 
 def get_post_by_slug(slug):
+	"""
+	Gets a post by slug
+	"""
 	post = memcache.get(slug)
 	if not post:
-		post = Post.all().filter('slug =', slug).filter("as_draft !=", True).order('as_draft').get()
+		post = Post.all().filter('slug =', slug).filter("as_draft =", False).get()
 		memcache.set(slug, post)
 	return post
 
-def get_posts_by_tag(tag, size=5):
-	# recuperar do memcache
-	return Post.all().filter('tags =', tag).filter("as_draft !=", True).order('as_draft').fetch(size)
-
 def configure(form):
+	"""
+	Configures the blog
+	"""
 	config = Config.all().get()
 	if not config:
 		config = Config()
@@ -98,16 +158,25 @@ def configure(form):
 	memcache.set('config', config)
 
 def add_link(form):
+	"""
+	Adds a link to the blog configuration
+	"""
 	name = form['name']
 	url = db.Link(form['url'])
 	link = Link(name=name, url=url, blog=get_config())
 	link.put()
 
 def remove_link(name):
+	"""
+	Removes a link from blog congiguration
+	"""
 	links = Link.all().filter('name =', name).fetch(100)
 	db.delete(links)
 
 def get_config():
+	"""
+	Gets the blog configuration. Returns None if there isn't a configuration for blog yet.
+	"""
 	config = memcache.get('config')
 	if not config:
 		config = Config.all().get()
@@ -115,6 +184,9 @@ def get_config():
 	return config
 
 def __update_sitemap(sitemap):
+	"""
+	Updates the given sitemap. Updates the content, save it to DS and to cache.
+	"""
 	sitemap.content = render('sitemap.tpl', posts=get_all_posts())
 	sitemap.put()
 	memcache.set('sitemap', sitemap)
@@ -122,6 +194,9 @@ def __update_sitemap(sitemap):
 	# submit to Google Webmaster Tools
 
 def get_sitemap():
+	"""
+	Gets the blog site map. If it doesn't exists yet, it will be created
+	"""
 	sitemap = memcache.get('sitemap')
 	if not sitemap:
 		sitemap = Sitemap.all().get()
@@ -133,6 +208,9 @@ def get_sitemap():
 	return sitemap
 
 def update_sitemap():
+	"""
+	Updates the blog sitemap
+	"""
 	__update_sitemap(get_sitemap())
 
 # Classes
