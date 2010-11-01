@@ -4,7 +4,7 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: /stats.*
+- url: /stats/.*
   script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
 
 - url: /admin/.*
@@ -16,9 +16,9 @@ handlers:
 
 admin_console:
   pages:
-  - name: My Console
-    url: /admin/interactive
-  - name: My Memcache
+  - name: AppStats
+    url: /stats/
+  - name: Memcache
     url: /admin/memcache
 
 builtins:
