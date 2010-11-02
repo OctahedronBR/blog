@@ -20,7 +20,7 @@
     @author Danilo Penna Queiroz [daniloqueiroz@octahehedron.com.br]
     @author Vítor Avelino Dutra Magalhães [vitoravelino@octahedron.com.br]
 """
-
+import logging
 from StringIO import StringIO
 from flask import url_for, request, redirect, make_response, abort
 from simplejson.encoder import JSONEncoder
@@ -34,7 +34,9 @@ import feedgenerator
 @app.before_request
 def before_request():
 	if (request.url_root.find("localhost") == -1):
-		namespace_manager.set_namespace(request.url_root[8:-1])
+		namespace = request.url_root[7:-1]
+		logging.debug("Namespace set to %s"%namespace)	
+		namespace_manager.set_namespace(namespace)
 
 @app.route('/')
 def index():
