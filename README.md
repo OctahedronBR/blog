@@ -1,7 +1,7 @@
 Octa Blog
 =========
 
-This is a simple blog engine developed to host Octahedron's blogs, and built on top of Google AppEngine.
+This is a simple blog engine developed to host Octahedron's blogs, and was built on top of Google AppEngine.
 
 Features
 --------
