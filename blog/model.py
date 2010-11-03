@@ -24,7 +24,7 @@
 from google.appengine.ext import db
 from google.appengine.ext.db import Key
 from google.appengine.api import users, memcache, namespace_manager
-from blog.util import render, slugify, strip_html_code, bbcode_to_html
+from blog.util import render, slugify, strip_html_code, bbcode_to_html, ping_services
 import traceback
 
 # Facade
@@ -191,7 +191,7 @@ def __update_sitemap(sitemap):
 	sitemap.put()
 	memcache.set('sitemap', sitemap)
 	memcache.delete('sitemap_view')
-	# submit to Google Webmaster Tools
+	ping_services(get_config().url + 'sitemap.xml')
 
 def get_sitemap():
 	"""

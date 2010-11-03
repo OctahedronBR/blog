@@ -22,11 +22,11 @@
 """
 
 from functools import wraps
-import model
-from google.appengine.api import users
+from google.appengine.api import users, urlfetch
 from flask import redirect, request, render_template
-import re
 from postmarkup import render_bbcode
+import model
+import re
 
 # Decorators
 def login_required(func):
@@ -59,3 +59,8 @@ def strip_html_code(value):
 def bbcode_to_html(value):
 	return render_bbcode(value)
 
+services = ["http://www.bing.com/webmaster/ping.aspx?siteMap=", "http://www.google.com/webmasters/sitemaps/ping?sitemap=", "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=YahooDemo&url="]
+
+def ping_services(sitemap):
+	for service in services:
+		urlfetch.fetch(service + sitemap)

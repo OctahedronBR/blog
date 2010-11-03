@@ -1,6 +1,4 @@
 Paginar posts (usar offset ou cursor?)
-UI / Rich Editor BBCode / link to bbcode_help.html (bbcode help file)
 Memcache por tag
 Integração com twitter (http://joshthecoder.github.com/tweepy/)
-Pingar Google Webmaster Tools sobre novo sitemap.xml
 Refatorar response como xml, json

@@ -4,7 +4,7 @@
 		<h2>{{ post.title }} {% if user %}[<a href="/post/edit/{{ post.key() }}" id="edit">Editar</a> | <a href="/remove/{{ post.key() }}" id="edit">Remover</a>]{% endif %}</h3>
 		<h3>_Publicado em {{ post.when.strftime("%d/%m/%Y") }} por {{ post.author.nickname() }}</h3>
 		<div id="text">
-			<p>{{ post.html_content }}</p>
+			{{ post.html_content }}
 		</div>
 		<div id="footer">
 			<ul>

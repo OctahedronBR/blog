@@ -98,6 +98,9 @@ def create(include=None, exclude=None, use_pygments=True, **kwargs):
     add_tag(SimpleTag, 'i', 'em')
     add_tag(SimpleTag, 'u', 'u')
     add_tag(SimpleTag, 's', 'strike')
+    add_tag(SimpleTag, 'h2', 'h2') # added by Vítor Avelino (vitoravelino@octahedron.com.br)
+    add_tag(SimpleTag, 'h3', 'h3') # "
+    add_tag(SimpleTag, 'h4', 'h4') # "
 
     add_tag(LinkTag, 'link', **kwargs)
     add_tag(LinkTag, 'url', **kwargs)

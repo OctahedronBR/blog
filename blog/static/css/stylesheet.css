@@ -34,6 +34,7 @@ hr {border: 1px solid #837d5f; height:0px; border-top: 1px solid #655f43; margin
 
 img {border-style: none;}
 
+input[type="submit"] {margin: 10px 0 0;}
 /**********************************/
 
 div#content {margin: 0 auto; width: 850px; display: table;}

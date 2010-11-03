@@ -22,5 +22,6 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$("textarea[name=content]").markItUp(mySettings);
 });
 

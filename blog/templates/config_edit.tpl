@@ -1,4 +1,4 @@
-	{% extends "layout.tpl" %}
+{% extends "layout.tpl" %}
 {% block body %}
 	<div class="section">
 		<h2>Configuração</h2>
