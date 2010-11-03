@@ -5,22 +5,22 @@ This is a simple blog engine developed to host Octahedron's blogs, and was built
 
 Features
 --------
-  * Suport multiple blogs, with different domains
-  * Post tags
+  * Multiple blogs with different domains
+  * Tags
   * Drafts
-  * View a post by slug
+  * Post identified by slug
   * BBCode formating
-  * RSS and JSon to get more recent posts
-  * Google sitemap.xml generation
+  * RSS and JSON to get recent posts
+  * sitemap.xml generation and automatic announce on Google, Bing and Yahoo
 
 License
 -------
-This Blog engine is under Affero GPL v3 License.
+This blog engine is under Affero GPL v3 License.
 For more info see the COPYING file, distributed with this program.
 
 Dependencies
 ------------
-This program uses Flask, Jinja2, Werkzeug (Flask dependency) and SimpleJSon. This programs are distributed as zip files.
+This program uses Flask, Jinja2, Werkzeug (Flask dependency) and SimpleJSON. This programs are distributed as zip files.
 It also uses the feedgenerator and the postmarkup.
 
 More information
