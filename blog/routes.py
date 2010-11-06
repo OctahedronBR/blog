@@ -26,7 +26,7 @@ from flask import url_for, request, redirect, make_response, abort
 from simplejson.encoder import JSONEncoder
 from blog import app, model
 from blog.model import Post, Config
-from blog.util import render, login_required, slugify, admin_required, do_ping
+from blog.util import render, login_required, slugify, do_ping
 from google.appengine.api import users, namespace_manager, memcache
 import feedgenerator
 
@@ -183,15 +183,6 @@ def tag(tag):
 # POST END #
 
 # API BEGIN #
-@app.route('/tasks/ping')
-@admin_required
-def ping():
-	service_url = request.form['service_url']
-	code = do_ping(service_url)
-	logging.debug("ping sitemap! (status code: %d -  url: %s)", code, service_url)
-	
-	return 'OK'
-
 @app.route('/sitemap.xml')
 def sitemap():
 	sitemap = memcache.get('sitemap_view')

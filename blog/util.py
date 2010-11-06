@@ -23,24 +23,22 @@
 
 from functools import wraps
 from google.appengine.api import users, urlfetch
+from google.appengine.api.labs import taskqueue
 from flask import redirect, request, render_template
 from postmarkup import render_bbcode
 import model
 import re
+import urllib
+services = {
+		'bing': ("http://www.bing.com/webmaster/ping.aspx","siteMap"),
+		'google': ("http://www.google.com/webmasters/sitemaps/ping","sitemap")
+		}
 
 # Decorators
 def login_required(func):
 	@wraps(func)
 	def decorated_view(*args, **kwargs):
 		if not users.get_current_user():
-			return redirect(users.create_login_url(request.url))
-		return func(*args, **kwargs)
-	return decorated_view
-	
-def admin_required(func):
-	@wraps(func)
-	def decorated_view(*args, **kwargs):
-		if not users.is_current_user_admin():
 			return redirect(users.create_login_url(request.url))
 		return func(*args, **kwargs)
 	return decorated_view
@@ -67,7 +65,20 @@ def strip_html_code(value):
 def bbcode_to_html(value):
 	return render_bbcode(value)
 
-def do_ping(url):
-	result = urlfetch.fetch(url)
-	return result.status_code 
+def ping_services():
+	# enqueue a task for each service to ping
+	for service in services.keys():
+		taskqueue.add(url='/tasks/ping/%s'%service, method = 'GET')
+		
+def do_ping(service):
+	# get service data (url and param_name)
+	url,param_name = services[service]
+	# Prepare input date
+	sitemap_url = model.get_config().url + 'sitemap.xml'
+	form_fields = {param_name: sitemap_url}
+	form_data = urllib.urlencode(form_fields)
+	# invoke the url fetch
+	result = urlfetch.fetch(url,payload=form_data,follow_redirects=True)
+	# return status code
+	return result.status_code 		
 

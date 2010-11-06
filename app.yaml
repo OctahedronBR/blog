@@ -4,6 +4,10 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /tasks/.*
+  script: tasks.py
+  login: admin
+
 - url: /stats/.*
   script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
 
