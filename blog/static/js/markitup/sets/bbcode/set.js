@@ -35,6 +35,6 @@ mySettings = {
 		{name:'Code', openWith:'[code]', closeWith:'[/code]'}, 
 		{separator:'---------------' },
 		{name:'Clean', className:"clean", replaceWith:function(markitup) { return markitup.selection.replace(/\[(.*?)\]/g, "") } },
-		{name:'Preview', className:"preview", call:'preview' }
+//		{name:'Preview', className:"preview", call:'preview' }
 	]
 }

@@ -6,6 +6,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="/static/images/icon48px.png" />
 		<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+		<link rel="alternate" type="application/rss+xml" title="{{config.blogname}} Feeds" href="{{config.url}}rss" />
 		{%block stylesheet %}
 		{% endblock %}
 

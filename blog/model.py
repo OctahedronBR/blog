@@ -23,9 +23,11 @@
 
 from google.appengine.ext import db
 from google.appengine.ext.db import Key
-from google.appengine.api import users, memcache, namespace_manager
-from blog.util import render, slugify, strip_html_code, bbcode_to_html, ping_services
-import traceback
+from google.appengine.api import users, memcache
+from google.appengine.api.labs import taskqueue
+from blog.util import render, slugify, strip_html_code, bbcode_to_html
+
+services = ["http://www.bing.com/webmaster/ping.aspx?siteMap=", "http://www.google.com/webmasters/sitemaps/ping?sitemap=", "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=YahooDemo&url="]
 
 # Facade
 def create_post(form):
@@ -191,7 +193,12 @@ def __update_sitemap(sitemap):
 	sitemap.put()
 	memcache.set('sitemap', sitemap)
 	memcache.delete('sitemap_view')
-	ping_services(get_config().url + 'sitemap.xml')
+	
+	sitemap_url = get_config().url + 'sitemap.xml'
+	for service in services:
+		url = service + sitemap_url
+		taskqueue.add(url='/tasks/ping', method = 'GET', params={'service_url': url})
+		
 
 def get_sitemap():
 	"""

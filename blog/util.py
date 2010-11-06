@@ -36,6 +36,14 @@ def login_required(func):
 			return redirect(users.create_login_url(request.url))
 		return func(*args, **kwargs)
 	return decorated_view
+	
+def admin_required(func):
+	@wraps(func)
+	def decorated_view(*args, **kwargs):
+		if not users.is_current_user_admin():
+			return redirect(users.create_login_url(request.url))
+		return func(*args, **kwargs)
+	return decorated_view
 
 # Other
 def render(template_name, **kwargs):
@@ -59,8 +67,7 @@ def strip_html_code(value):
 def bbcode_to_html(value):
 	return render_bbcode(value)
 
-services = ["http://www.bing.com/webmaster/ping.aspx?siteMap=", "http://www.google.com/webmasters/sitemaps/ping?sitemap=", "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=YahooDemo&url="]
+def do_ping(url):
+	result = urlfetch.fetch(url)
+	return result.status_code 
 
-def ping_services(sitemap):
-	for service in services:
-		urlfetch.fetch(service + sitemap)

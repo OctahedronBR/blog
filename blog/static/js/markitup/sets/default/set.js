@@ -22,6 +22,6 @@ mySettings = {
 		{name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
 		{separator:'---------------' },
 		{name:'Clean', className:'clean', replaceWith:function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") } },		
-		{name:'Preview', className:'preview',  call:'preview'}
+		//{name:'Preview', className:'preview',  call:'preview'}
 	]
 }
