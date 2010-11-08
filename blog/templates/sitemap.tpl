@@ -6,13 +6,13 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 	<url>
-		<loc>http://{{ config.url }}</loc>
+		<loc>{{ config.url }}</loc>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	{% for post in posts %}
 	<url>
-		<loc>http://{{ config.url + post.slug }}</loc>
+		<loc>{{ config.url + post.slug }}</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.4</priority>
 	</url>
