@@ -52,7 +52,8 @@ div#main h2 a:hover {color: #a29979;}
 
 .post h3 {margin: 5px 0 0 10px;}
 .post #text {margin: 15px 10px;}
-.post #text p {width: 630px; line-height: 18px; margin: 7px 0 0;}
+.post #text h2 {background: none;}
+.post #text p {width: 630px; line-height: 18px; margin: 0;}
 .post #footer ul {margin: 10px 0 0 10px; font-size: 15px;}
 .post #footer ul li {display: inline;}
 .post #footer ul li a {color: #8e8768}
