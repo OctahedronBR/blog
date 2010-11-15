@@ -20,7 +20,7 @@
     @author Danilo Penna Queiroz [daniloqueiroz@octahehedron.com.br]
     @author Vítor Avelino Dutra Magalhães [vitoravelino@octahedron.com.br]
 """
-import logging
+
 from StringIO import StringIO
 from flask import url_for, request, redirect, abort
 from simplejson.encoder import JSONEncoder
@@ -28,14 +28,14 @@ from blog import app, model
 from blog.model import Post, Config
 from blog.util import render, render_xml, render_json, login_required, slugify, do_ping
 from google.appengine.api import users, namespace_manager, memcache
-import feedgenerator
+import feedgenerator, logging
 
 # MISC #
 @app.before_request
 def before_request():
 	if (request.url_root.find("localhost") == -1):
 		namespace = request.url_root[7:-1]
-		logging.debug("Namespace set to %s"%namespace)	
+		logging.debug("Namespace set to %s" %namespace)	
 		namespace_manager.set_namespace(namespace)
 
 @app.route('/')

@@ -26,9 +26,8 @@ from google.appengine.api import users, urlfetch
 from google.appengine.api.labs import taskqueue
 from flask import redirect, request, make_response, render_template
 from postmarkup import render_bbcode
-import model
-import re
-import urllib
+import model, re, urllib
+
 services = {
 		'bing': ("http://www.bing.com/webmaster/ping.aspx","siteMap"),
 		'google': ("http://www.google.com/webmasters/sitemaps/ping","sitemap")
@@ -49,7 +48,9 @@ def render(template_name, **kwargs):
 	config = model.get_config()
 	return render_template(template_name, config=config, user=user, **kwargs)
 
-def render_json(output):
+def render_json(output, callback=''):
+	callback = request.args.get('callback', '')
+	output = "%s(%s)" % (callback, output)
 	response = make_response(output)
 	response.headers['Content-Type'] = 'application/json'
 	return response
