@@ -22,11 +22,11 @@
 """
 import logging
 from StringIO import StringIO
-from flask import url_for, request, redirect, make_response, abort
+from flask import url_for, request, redirect, abort
 from simplejson.encoder import JSONEncoder
 from blog import app, model
 from blog.model import Post, Config
-from blog.util import render, login_required, slugify, do_ping
+from blog.util import render, render_xml, render_json, login_required, slugify, do_ping
 from google.appengine.api import users, namespace_manager, memcache
 import feedgenerator
 
@@ -189,9 +189,7 @@ def sitemap():
 	if not sitemap:
 		sitemap = model.get_sitemap().content
 		memcache.set('sitemap_view', sitemap)
-	response = make_response(sitemap)
-	response.headers['Content-Type'] = 'text/xml'
-	return response
+	return render_xml(sitemap)
 
 @app.route('/json')
 @app.route('/json/<int:limit>')
@@ -207,7 +205,7 @@ def json(limit=10):
 		entry['content'] = post.html_content
 		entry['tags'] = post.tags
 		to_json.append(entry)
-	return JSONEncoder().encode(to_json)
+	return render_json(JSONEncoder().encode(to_json))
 
 @app.route('/rss')
 @app.route('/rss/<int:limit>')

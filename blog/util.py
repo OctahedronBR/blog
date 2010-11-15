@@ -24,7 +24,7 @@
 from functools import wraps
 from google.appengine.api import users, urlfetch
 from google.appengine.api.labs import taskqueue
-from flask import redirect, request, render_template
+from flask import redirect, request, make_response, render_template
 from postmarkup import render_bbcode
 import model
 import re
@@ -48,6 +48,16 @@ def render(template_name, **kwargs):
 	user = users.get_current_user()
 	config = model.get_config()
 	return render_template(template_name, config=config, user=user, **kwargs)
+
+def render_json(output):
+	response = make_response(output)
+	response.headers['Content-Type'] = 'application/json'
+	return response
+
+def render_xml(output):
+	response = make_response(output)
+	response.headers['Content-Type'] = 'text/xml'
+	return response
 
 _slugify_strip_re = re.compile(r'[^\w\s-]')
 _slugify_hyphenate_re = re.compile(r'[-\s]+')
