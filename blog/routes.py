@@ -224,7 +224,7 @@ def rss(limit=10):
 		feed.add_item(title=post.title,
 					link=request.url_root + post.slug,
 					author_name = post.author.nickname(),
-					description=post.content,
+					description=post.html_content,
 					pubdate = post.when)
 	out = StringIO()
 	feed.write(out, 'utf-8')
