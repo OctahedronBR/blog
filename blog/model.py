@@ -25,6 +25,7 @@ from google.appengine.ext import db
 from google.appengine.ext.db import Key
 from google.appengine.api import users, memcache
 from blog.util import render, slugify, strip_html_code, bbcode_to_html, ping_services
+import tweepy
 
 # Facade
 def create_post(form):
@@ -141,7 +142,7 @@ def configure(form):
 	"""
 	Configures the blog
 	"""
-	config = Config.all().get()
+	config = get_config()
 	if not config:
 		config = Config()
 	config.blogname = form['blogname']
@@ -165,6 +166,37 @@ def add_link(form):
 	url = db.Link(form['url'])
 	link = Link(name=name, url=url, blog=get_config())
 	link.put()
+
+def configure_twitter(form):
+	"""
+	Configure twitter [improve this!]
+	"""
+	config = get_config()
+	config.consumer_key = form['consumer_key']
+	config.consumer_secret = form['consumer_secret']
+	config.put()
+	memcache.set('config', config)
+	## prepare twitter
+	callback_url = str(config.url) + "twitter/callback"
+	auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret, callback_url)
+	#auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret)
+	redirect_url = auth.get_authorization_url()
+	memcache.set('request_token', (auth.request_token.key,auth.request_token.secret))
+	## return url to redirect user
+	return redirect_url
+	#return callback_url	
+
+def configure_twitter_access(form):
+	verifier = form['oauth_verifier']
+	config = get_config()
+	auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret)
+	token = memcache.get('request_token')
+	auth.set_request_token(token[0], token[1])
+   	auth.get_access_token(verifier)
+	config.access_key = auth.access_token.key
+  	config.access_secret = auth.access_token.secret
+	config.put()
+	memcache.set('config', config)
 
 def remove_link(name):
 	"""
@@ -229,6 +261,10 @@ class Config(db.Model):
 	url = db.LinkProperty()
 	desc = db.StringProperty()
 	lang = db.StringProperty()
+	consumer_key = db.StringProperty()
+	consumer_secret = db.StringProperty()
+	access_key = db.StringProperty()
+	access_secret = db.StringProperty()
 
 class Link(db.Model):
 	name = db.StringProperty(required=True)

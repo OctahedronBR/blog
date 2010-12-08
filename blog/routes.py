@@ -29,6 +29,7 @@ from blog.model import Post, Config
 from blog.util import render, render_xml, render_json, login_required, slugify, do_ping
 from google.appengine.api import users, namespace_manager, memcache
 import feedgenerator, logging
+import tweepy
 
 # MISC #
 @app.before_request
@@ -98,6 +99,21 @@ def save_link():
 def remove_link(link_name):
 	model.remove_link(link_name)
 	return redirect(url_for('edit_config'))
+
+@app.route('/config/twitter')
+@login_required
+def config_twitter():
+	return render("config_twitter.tpl")
+
+@app.route('/config/twitter', methods=['POST'])
+@login_required
+def save_twitter():
+	return redirect(model.configure_twitter(request.form))
+
+@app.route('/twitter/callback')
+def twitter_callback():
+	model.configure_twitter_access(form)
+	redirect(url_for('edit_config'))	
 # CONFIG END #
 
 # POST BEGIN #

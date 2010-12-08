@@ -26,6 +26,8 @@
 			</ul>
 			<br/>
 			<p><a href="/config/add_link">Adicionar novo link</a></p>
+			<h3>Twitter</h3>
+			<p><a href="/config/twitter">Configurar Twitter</a></p>
 		</div>
 	</div>
 {% endblock %}

@@ -33,6 +33,7 @@ if 'werkzeug.zip' not in sys.path: sys.path.insert(0, 'werkzeug.zip');
 if 'flask.zip' not in sys.path: sys.path.insert(0, 'flask.zip');
 if 'simplejson.zip' not in sys.path: sys.path.insert(0, 'simplejson.zip');
 if 'jinja2.zip' not in sys.path: sys.path.insert(0, 'jinja2.zip');
+if 'tweepy.zip' not in sys.path: sys.path.insert(0, 'tweepy.zip');
 
 import werkzeug 
 from flask import Flask
