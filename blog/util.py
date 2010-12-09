@@ -27,6 +27,7 @@ from google.appengine.api.labs import taskqueue
 from flask import redirect, request, make_response, render_template
 from postmarkup import render_bbcode
 import model, re, urllib
+import tweepy
 
 services = {
 		'bing': ("http://www.bing.com/webmaster/ping.aspx","siteMap"),
@@ -91,5 +92,25 @@ def do_ping(service):
 	# invoke the url fetch
 	result = urlfetch.fetch(url,payload=form_data,follow_redirects=True)
 	# return status code
-	return result.status_code 		
+	return result.status_code 	
 
+def twit_post(key):
+	if model.__is_twitter_configured():
+		taskqueue.add(url='/tasks/twit/%s'%key, method = 'GET')
+
+
+def twit(key):
+	config = model.get_config()
+	post = model.get_post_by_key(key)
+	if not post.as_draft:
+		
+		auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret)
+		auth.set_access_token(config.access_key, config.access_secret)
+		api = tweepy.API(auth)
+		
+		post_url = config.url + post.slug
+		msg = post.title + " " + post_url
+		api.update_status(msg)
+		return msg
+	else:
+		return "draft!"

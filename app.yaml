@@ -1,5 +1,5 @@
 application: octahedronblog
-version: version1beta
+version: version1-2beta
 runtime: python
 api_version: 1
 

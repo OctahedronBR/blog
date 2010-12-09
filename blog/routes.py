@@ -110,10 +110,11 @@ def config_twitter():
 def save_twitter():
 	return redirect(model.configure_twitter(request.form))
 
-@app.route('/twitter/callback')
+@app.route('/twitter/callback', methods=['GET'])
 def twitter_callback():
-	model.configure_twitter_access(form)
-	redirect(url_for('edit_config'))	
+	# it's a get, so access request parameters using args instead of form
+	model.configure_twitter_access(request.args)
+	return redirect(url_for('edit_config'))	
 # CONFIG END #
 
 # POST BEGIN #

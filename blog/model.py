@@ -24,7 +24,7 @@
 from google.appengine.ext import db
 from google.appengine.ext.db import Key
 from google.appengine.api import users, memcache
-from blog.util import render, slugify, strip_html_code, bbcode_to_html, ping_services
+from blog.util import render, slugify, strip_html_code, bbcode_to_html, ping_services, twit_post
 import tweepy
 
 # Facade
@@ -44,6 +44,7 @@ def create_post(form):
 	memcache.set(str(post.key()), post)
 	memcache.delete_multi(['all_posts_10', 'all_drafts_10'])
 	update_sitemap()
+	twit_post(str(post.key()))
 	return post
 
 def update_post(form):
@@ -89,6 +90,7 @@ def publish_draft(key):
 	draft.as_draft = False
 	draft.put()
 	memcache.delete_multi(['all_posts_10','all_drafts_10',str(draft.key())])
+	twit_post(str(draft.key()))
 
 def get_all_posts(size=10):
 	"""
@@ -192,9 +194,9 @@ def configure_twitter_access(form):
 	auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret)
 	token = memcache.get('request_token')
 	auth.set_request_token(token[0], token[1])
-   	auth.get_access_token(verifier)
+	auth.get_access_token(verifier)
 	config.access_key = auth.access_token.key
-  	config.access_secret = auth.access_token.secret
+	config.access_secret = auth.access_token.secret
 	config.put()
 	memcache.set('config', config)
 
@@ -244,6 +246,10 @@ def update_sitemap():
 	Updates the blog sitemap
 	"""
 	__update_sitemap(get_sitemap())
+
+def __is_twitter_configured():
+	config = get_config()
+	return config.access_key != None
 
 # Classes
 class Post(db.Model):

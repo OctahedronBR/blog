@@ -21,23 +21,43 @@
     @author Vítor Avelino Dutra Magalhães [vitoravelino@octahedron.com.br]
 """
 import logging
-from blog.util import do_ping
+from blog.util import do_ping, twit
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.appstats import recording
+from google.appengine.api import namespace_manager
 
+
+def set_namespace(request):
+	url = request.url[7:len(request.url)]
+	if (url.find("localhost") == -1):
+		namespace = url[0:url.find('/')]
+		logging.debug("Namespace set to %s" %namespace)	
+		namespace_manager.set_namespace(namespace)
+	
 class PingWorker(webapp.RequestHandler):
 	"""
 	Worker to handler ping requests
 	"""
 	def get(self, service): 
+		set_namespace(self.request)
 		code = do_ping(service)
 		logging.debug("ping sitemap! (status code: %d -  service: %s)", code, service)
+
+class TwitterWorker(webapp.RequestHandler):
+	"""
+	Worker to handler ping requests
+	"""
+	def get(self, key): 
+		set_namespace(self.request)
+		msg = twit(key)
+		logging.debug("twitting post! (msg: %s - length: %d)", msg, len(msg))
 
 
 def main():
 	# create app
-	app = webapp.WSGIApplication([('/tasks/ping/(.*)', PingWorker)])
+	app = webapp.WSGIApplication([('/tasks/ping/(.*)', PingWorker),
+								('/tasks/twit/(.*)', TwitterWorker)])
 	# instrument app for appstats
 	app = recording.appstats_wsgi_middleware(app)
 	# run the app
