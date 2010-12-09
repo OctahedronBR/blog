@@ -11,7 +11,8 @@ Features
   * Post identified by slug
   * BBCode formating
   * RSS and JSON to get recent posts
-  * sitemap.xml generation and automatic announce on Google, Bing and Yahoo
+  * sitemap.xml generation and automatic announce on Google and Bing
+  * Twitter support - update twitter when new posts created
 
 License
 -------
