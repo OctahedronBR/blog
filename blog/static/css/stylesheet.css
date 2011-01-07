@@ -19,6 +19,8 @@ body {background-color: #cce7d4; background-image: url('/static/images/bg-left.p
 .large-width {width: 300px}
 .tiny-width {width: 100px}
 
+body {font-family: 'AUdimat Regular', Verdana, Arial, Geneva, Helvetica, sans-serif;}
+
 a, h1, h2, h3, h4, strong {font-family: 'AUdimat Bold', Verdana, Arial, Geneva, Helvetica, sans-serif;}
 
 h1 {font-size: 28px;}
@@ -27,8 +29,6 @@ h3 {font-size: 15px;}
 h4 {font-size: 12px;}
 
 a {text-decoration: none;}
-
-p, li, input, label, button {font-family: 'AUdimat Regular', Verdana, Arial, Geneva, Helvetica, sans-serif;}
 
 hr {border: 1px solid #837d5f; height:0px; border-top: 1px solid #655f43; margin: 15px 0px;}
 
