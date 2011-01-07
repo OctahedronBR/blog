@@ -1,6 +1,6 @@
 {% block stylesheet %}
-	<link rel="stylesheet" type="text/css" href="/static/js/markitup/skins/markitup/style.css" />
-	<link rel="stylesheet" type="text/css" href="/static/js/markitup/sets/bbcode/style.css" />
+	<link rel="stylesheet" type="text/css" href="/js/markitup/skins/markitup/style.css" />
+	<link rel="stylesheet" type="text/css" href="/js/markitup/sets/bbcode/style.css" />
 {% endblock %}
 {% extends "layout.tpl" %}
 {% block body %}
@@ -14,7 +14,7 @@
 					<input type="text" name="title" class="normal-width"/> <br />
 					<input type="text" name="slug" class="normal-width"/>
 					<button id="slugify">Slugify!</button> <br />
-					<label for="content">Conteúdo <a href="/static/bbcode_help.html" target="_blank">(BBCode?)</a></label> <br />
+					<label for="content">Conteúdo <a href="/help/bbcode" target="_blank">(BBCode?)</a></label> <br />
 					<textarea name="content" class="large-width"></textarea> <br />
 					<label for="tags">Tags (e.g.: cloud computing, appengine, python)</label> <br />
 					<input type="text" name="tags" class="normal-width"/> <br />
@@ -28,8 +28,8 @@
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-	<script type="text/javascript" src="/static/js/form.js"></script>
-	<script type="text/javascript" src="/static/js/markitup/jquery.markitup.js"></script>
-	<script type="text/javascript" src="/static/js/markitup/sets/bbcode/set.js"></script>
+	<script type="text/javascript" src="/js/form.js"></script>
+	<script type="text/javascript" src="/js/markitup/jquery.markitup.js"></script>
+	<script type="text/javascript" src="/js/markitup/sets/bbcode/set.js"></script>
 {% endblock %}
 

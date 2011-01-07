@@ -1,16 +1,16 @@
 @font-face {
 	font-family: 'AUdimat Regular';
-	src: local('AUdimat Regular'), url('/static/fonts/AUdimat-Regular.ttf');
+	src: local('AUdimat Regular'), url('/fonts/AUdimat-Regular.ttf');
 }
 
 @font-face {
 	font-family: 'AUdimat Bold';
-	src: local('AUdimat Bold'), url('/static/fonts/AUdimat-Bold.ttf');
+	src: local('AUdimat Bold'), url('/fonts/AUdimat-Bold.ttf');
 }
 
 html {height: 100%;}
 
-body {background-color: #cce7d4; background-image: url('/static/images/bg-left.png'), url('/static/images/bg-right.png'); background-repeat: no-repeat, no-repeat; background-position: 0 125%, 100% 0;}
+body {background-color: #cce7d4; background-image: url('/images/bg-left.png'), url('/images/bg-right.png'); background-repeat: no-repeat, no-repeat; background-position: 0 125%, 100% 0;}
 
 .left {float:left}
 .right {float:right}
@@ -65,7 +65,7 @@ div#sidebar {margin-left: 630px; padding: 10px; width:200px; height: 100%; backg
 
 div#sidebar #header {text-align: center;}
 
-.search {background: #fff url('/static/images/search.png') no-repeat right; padding: 3px 4px 2px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
+.search {background: #fff url('/images/search.png') no-repeat right; padding: 3px 4px 2px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
 .search input {border: none;}
 
 div#sidebar h2 {color: #cce7d4;}

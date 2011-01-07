@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" type="image/x-icon" href="/static/images/icon48px.png" />
-		<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+		<link rel="shortcut icon" type="image/x-icon" href="/images/icon48px.png" />
+		<link rel="stylesheet" type="text/css" href="/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
 		<link rel="alternate" type="application/rss+xml" title="{{config.blogname}} Feeds" href="{{config.url}}rss" />
 		{%block stylesheet %}
 		{% endblock %}
@@ -20,7 +20,7 @@
 			<div id="sidebar" class="right">
 				<hr />
 				<div id="header">
-					<a href="{{config.url}}"><img alt="Octahedron" src="/static/images/logo.png" /></a><br />
+					<a href="{{config.url}}"><img alt="Octahedron" src="/images/logo.png" /></a><br />
 				</div>
 				<hr />
 				<div class="search">

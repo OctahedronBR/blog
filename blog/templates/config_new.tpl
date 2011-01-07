@@ -22,6 +22,6 @@
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-	<script type="text/javascript" src="/static/js/form.js"></script>
+	<script type="text/javascript" src="/js/form.js"></script>
 {% endblock %}
 

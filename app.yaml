@@ -1,9 +1,26 @@
 application: octahedronblog
-version: version1-2beta
+version: version1-3beta
 runtime: python
 api_version: 1
 
 handlers:
+
+- url: /css
+  static_dir: css
+
+- url: /images
+  static_dir: images
+
+- url: /js
+  static_dir: js
+
+- url: /fonts
+  static_dir: fonts
+
+- url: /help/bbcode
+  static_files: bbcode_help.html 
+  upload: bbcode_help.html
+
 - url: /tasks/.*
   script: tasks.py
   login: admin
