@@ -11,16 +11,23 @@
 			<form action="/post/update" method="post">
 				<fieldset>
 					<input type="hidden" name="key" value="{{ post.key() }}" class="normal-width"/>
-					<label for="title">Título</label> <br />
-					<input type="text" name="title" value="{{ post.title }}" class="normal-width"/> <br />
+					<label for="title">
+						Título: <br />
+						<input type="text" name="title" value="{{ post.title }}" class="normal-width"/> <br />
+					</label>
 					<input type="text" name="slug" value="{{ post.slug }}" class="normal-width"/>
 					<button id="slugify">Slugify!</button> <br />
-					<label for="content">Conteúdo <a href="/help/bbcode" target="_blank">(BBCode?)</a></label> <br />
-					<textarea type="text" name="content" class="large-width">{{ post.coded_content }}</textarea> <br />
-					<label for="tags">Tags</label> <br />
-					<input type="text" name="tags" value="{{ tags }}" class="normal-width"/> <br />
-					<input type="checkbox" name="draft" value="True" {% if draft %}checked{% endif %}/>
-					<label for="draft">Rascunho</label><br />
+					<label for="content">
+						Conteúdo: <a href="/help/bbcode" target="_blank">(BBCode?)</a> <br />
+						<textarea type="text" name="content" class="large-width">{{ post.coded_content }}</textarea> <br />
+					</label>
+					<label for="tags">
+						Tags: <br />
+						<input type="text" name="tags" value="{{ tags }}" class="normal-width"/> <br />
+					</label>
+					<label for="draft">
+						<input type="checkbox" name="draft" value="True" {% if draft %}checked{% endif %}/>Rascunho <br />
+					</label>
 					<input id="submit" type="submit" value="Salvar" />
 				</fieldset>
 			</form>

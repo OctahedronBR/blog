@@ -1,11 +1,29 @@
 @font-face {
-	font-family: 'AUdimat Regular';
-	src: local('AUdimat Regular'), url('/fonts/AUdimat-Regular.ttf');
+	font-family: 'AUdimat';
+	src: url('/fonts/AUdimat-Regular.eot');
+	src: local('☺'), url('/fonts/AUdimat-Regular.ttf') format('truetype');
 }
 
 @font-face {
-	font-family: 'AUdimat Bold';
-	src: local('AUdimat Bold'), url('/fonts/AUdimat-Bold.ttf');
+	font-family: 'AUdimat';
+	src: url('/fonts/AUdimat-Bold.eot');
+	src: local('☺'), url('/fonts/AUdimat-Bold.ttf') format('truetype');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'AUdimat';
+	src: url('/fonts/AUdimat-Italic.eot');
+	src: local('☺'), url('/fonts/AUdimat-Italic.ttf') format('truetype');
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'AUdimat';
+	src: url('/fonts/AUdimat-BoldItalic.eot');
+	src: local('☺'), url('/fonts/AUdimat-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
 }
 
 html {height: 100%;}
@@ -19,22 +37,33 @@ body {background-color: #cce7d4; background-image: url('/images/bg-left.png'), u
 .large-width {width: 300px}
 .tiny-width {width: 100px}
 
-body {font-family: 'AUdimat Regular', Verdana, Arial, Geneva, Helvetica, sans-serif;}
+body {font-family: 'AUdimat', "Trebuchet MS", "Lucida Grande", Arial, serif; font-weight: normal;}
 
-a, h1, h2, h3, h4, strong {font-family: 'AUdimat Bold', Verdana, Arial, Geneva, Helvetica, sans-serif;}
+a, h1, h2, h3, h4, strong {font-weight: bold;}
 
 h1 {font-size: 28px;}
 h2 {font-size: 24px;}
-h3 {font-size: 15px;}
-h4 {font-size: 12px;}
+h3 {font-size: 18.5px; padding: 20px 0 5px;}
+h4 {font-size: 13.5px;}
 
-a {text-decoration: none;}
+a {color: #70694a; text-decoration: none;}
+a:hover {color:#8e8768}
 
 hr {border: 1px solid #837d5f; height:0px; border-top: 1px solid #655f43; margin: 15px 0px;}
 
 img {border-style: none;}
 
 input[type="submit"] {margin: 10px 0 0;}
+
+small {font-size: 15px;}
+small a {border-bottom: 1px dashed;}
+
+dt {float: left; margin: 0 5px 0 0;}
+
+textarea {height: 100px;}
+
+p.warning {padding: 5px 0;}
+
 /**********************************/
 
 div#content {margin: 0 auto; width: 850px; display: table;}

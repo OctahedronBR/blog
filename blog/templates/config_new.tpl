@@ -6,14 +6,22 @@
 			<p class="warning"></p>
 			<form action="/config/save" method="post">
 				<fieldset>
-					<label for="blogname">Nome do blog</label> <br />
-					<input type="text" name="blogname" class="normal-width"/> <br />
-					<label for="url">URL</label> <br />
-					<input type="text" name="url" class="normal-width"/> <br />
-					<label for="desc">Descrição</label> <br />
-					<textarea name="desc" class="normal-width"></textarea> <br />
-					<label for="lang">Língua [use 'en', 'pt_BR', ...]</label> <br />
-					<input type="text" name="lang" class="tiny-width"/> <br />
+					<label for="blogname">
+						Nome do blog <br />
+						<input type="text" name="blogname" class="normal-width"/> <br />
+					</label>
+					<label for="url">
+						URL <br />
+						<input type="text" name="url" class="normal-width"/> <br />
+					</label>
+					<label for="desc">
+						Descrição <br />
+						<textarea name="desc" class="normal-width"></textarea> <br />
+					</label>
+					<label for="lang">
+						Língua [use 'en', 'pt_BR', ...] <br />
+						<input type="text" name="lang" class="tiny-width"/> <br />
+					</label>
 					<input id="submit" type="submit" value="Salvar" />
 				</fieldset>
 			</form>

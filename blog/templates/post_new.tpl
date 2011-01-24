@@ -10,16 +10,23 @@
 			<p class="warning"></p>
 			<form action="/post/create" method="post">
 				<fieldset>
-					<label for="title">Título</label> <br />
-					<input type="text" name="title" class="normal-width"/> <br />
+					<label for="title">
+						Título: <br />
+						<input type="text" name="title" class="normal-width"/> <br />
+					</label>
 					<input type="text" name="slug" class="normal-width"/>
 					<button id="slugify">Slugify!</button> <br />
-					<label for="content">Conteúdo <a href="/help/bbcode" target="_blank">(BBCode?)</a></label> <br />
-					<textarea name="content" class="large-width"></textarea> <br />
-					<label for="tags">Tags (e.g.: cloud computing, appengine, python)</label> <br />
-					<input type="text" name="tags" class="normal-width"/> <br />
-					<input type="checkbox" name="draft" value="True" />
-					<label for="draft">Rascunho</label><br />
+					<label for="content">
+						Conteúdo: <a href="/help/bbcode" target="_blank">(BBCode?)</a> <br />
+						<textarea name="content" class="large-width"></textarea> <br />
+					</label>
+					<label for="tags">
+						Tags: (e.g.: cloud computing, appengine, python) <br />
+						<input type="text" name="tags" class="normal-width"/> <br />
+					</label>
+					<label for="draft">
+						<input type="checkbox" name="draft" value="True" />Rascunho <br />
+					</label>
 					<input id="submit" type="submit" value="Criar" />
 				</fieldset>
 			</form>

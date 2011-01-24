@@ -6,28 +6,44 @@
 			<p class="warning">{% if saved %}<strong>Configuration Saved</strong>{% endif %}</p>
 			<form action="/config/save" method="post">
 				<fieldset>
-					<label for="blogname">Nome do Blog</label> <br />
-					<input type="text" name="blogname" value="{{ config.blogname }}" class="normal-width"/> <br />
-					<label for="url">URL</label> <br />
-					<input type="text" name="url" value="{{ config.url }}" class="normal-width"/> <br />
-					<label for="desc">Descrição</label> <br />
-					<textarea name="desc" class="normal-width">{{ config.desc }}</textarea> <br />
-					<label for="lang">Língua [use 'en', 'pt_BR', ...]</label> <br />
-					<input type="text" name="lang" value="{{ config.lang }}" class="tiny-width"/> <br />
+					<label for="blogname">
+						Nome do Blog: <br />
+						<input type="text" name="blogname" value="{{ config.blogname }}" class="normal-width"/> <br />
+					</label>
+					<label for="url">
+						URL: <br />
+						<input type="text" name="url" value="{{ config.url }}" class="normal-width"/> <br />
+					</label>
+					<label for="desc">
+						Descrição: <br />
+						<textarea name="desc" class="normal-width">{{ config.desc }}</textarea> <br />
+					</label>
+					<label for="lang">
+						Língua: [e.g.: 'en', 'pt_BR', ...] <br />
+						<input type="text" name="lang" value="{{ config.lang }}" class="tiny-width"/> <br />
+					</label>
 					<input id="submit" type="submit" value="Salvar" />
 				</fieldset>
 			</form>
-			<br/>
-			<h3>Links</h3>
+			<h3>Links <small>[<a href="/config/add_link">Adicionar novo</a>]</small></h3>
+			{% if config.links %}
 			<ul>
 			{% for link in config.links %}
-			<li> {{link.name}} - {{link.url}} - <a href="/config/remove_link/{{link.name}}">remove</a></li>
+				<li>{{link.name}} - {{link.url}} <small>[<a href="/config/remove_link/{{link.name}}" title="Remove">X</a>]</small></li>
 			{% endfor %}
 			</ul>
-			<br/>
-			<p><a href="/config/add_link">Adicionar novo link</a></p>
-			<h3>Twitter</h3>
-			<p><a href="/config/twitter">Configurar Twitter</a></p>
+			{% else %}
+			<p>Nenhum link cadastrado.</p>
+			{% endif %}
+			<h3>Twitter API <small>[<a href="/config/twitter">Configurar</a>]</small></h3>
+			{% if config.access_key and config.access_secret %}
+			<dl>
+				<dt>Access key:</dt> <dd>{{config.access_key}}</dd>
+				<dt>Access secret:</dt> <dd>{{config.access_secret}}</dd>
+			</dl>
+			{% else %}
+			<p>Nenhuma configuração.</p>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
