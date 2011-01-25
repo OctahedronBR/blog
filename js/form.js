@@ -9,7 +9,6 @@ $(document).ready(function() {
 			$('p.warning').html("Preencha o formulário corretamente!");
 			return false;
 		}
-
 	});
 
 	$('button#slugify').click(function() {

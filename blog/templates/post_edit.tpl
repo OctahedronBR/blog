@@ -35,7 +35,7 @@
 	</div>
 {% endblock %}
 {% block scripts %}
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/form.js"></script>
 	<script type="text/javascript" src="/js/markitup/jquery.markitup.js"></script>
 	<script type="text/javascript" src="/js/markitup/sets/bbcode/set.js"></script>
