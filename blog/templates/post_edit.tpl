@@ -1,8 +1,9 @@
-{% block stylesheet %}
+{% extends "layout.tpl" %}
+{% block header %}
 	<link rel="stylesheet" type="text/css" href="/js/markitup/skins/markitup/style.css" />
 	<link rel="stylesheet" type="text/css" href="/js/markitup/sets/bbcode/style.css" />
+	<title>{{config.blogname}}{% if post %} | Editando '{{post.title}}' {% endif %}</title>
 {% endblock %}
-{% extends "layout.tpl" %}
 {% block body %}
 	<div class="section">
 		<h2>Editar post</h2>
@@ -17,6 +18,10 @@
 					</label>
 					<input type="text" name="slug" value="{{ post.slug }}" class="normal-width"/>
 					<button id="slugify">Slugify!</button> <br />
+					<label for="desc">
+						Descrição do conteúdo: (~160 caracteres / <a href="http://en.wikipedia.org/wiki/Search_engine_optimization" target="_blank">SEO</a>) <br />
+						<textarea name="desc" class="large-width">{{ post.desc }}</textarea> <br />
+					</label>
 					<label for="content">
 						Conteúdo: <a href="/help/bbcode" target="_blank">(BBCode?)</a> <br />
 						<textarea type="text" name="content" class="large-width">{{ post.coded_content }}</textarea> <br />

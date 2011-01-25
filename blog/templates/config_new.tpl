@@ -1,4 +1,7 @@
 {% extends "layout.tpl" %}
+{% block header %}
+		<title>{{config.blogname}} | Configuração inicial</title>
+{% endblock %}
 {% block body %}
 	<div class="section">
 		<h2>Configuração inicial</h2>
@@ -7,19 +10,19 @@
 			<form action="/config/save" method="post">
 				<fieldset>
 					<label for="blogname">
-						Nome do blog <br />
+						Nome do blog: <br />
 						<input type="text" name="blogname" class="normal-width"/> <br />
 					</label>
 					<label for="url">
-						URL <br />
+						URL: <br />
 						<input type="text" name="url" class="normal-width"/> <br />
 					</label>
 					<label for="desc">
-						Descrição <br />
+						Descrição: <br />
 						<textarea name="desc" class="normal-width"></textarea> <br />
 					</label>
 					<label for="lang">
-						Língua [use 'en', 'pt_BR', ...] <br />
+						Língua: [e.g.: 'en', 'pt_BR', ...] <br />
 						<input type="text" name="lang" class="tiny-width"/> <br />
 					</label>
 					<input id="submit" type="submit" value="Salvar" />

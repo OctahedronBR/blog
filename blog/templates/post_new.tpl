@@ -1,8 +1,9 @@
-{% block stylesheet %}
+{% extends "layout.tpl" %}
+{% block header %}
 	<link rel="stylesheet" type="text/css" href="/js/markitup/skins/markitup/style.css" />
 	<link rel="stylesheet" type="text/css" href="/js/markitup/sets/bbcode/style.css" />
+	<title>{{config.blogname}} | Novo post</title>
 {% endblock %}
-{% extends "layout.tpl" %}
 {% block body %}
 	<div class="section">
 		<h2>Novo post</h2>
@@ -16,6 +17,10 @@
 					</label>
 					<input type="text" name="slug" class="normal-width"/>
 					<button id="slugify">Slugify!</button> <br />
+					<label for="desc">
+						Descrição do conteúdo: (~160 caracteres / <a href="http://en.wikipedia.org/wiki/Search_engine_optimization" target="_blank">SEO</a>)</a> <br />
+						<textarea name="desc" class="large-width"></textarea> <br />
+					</label>
 					<label for="content">
 						Conteúdo: <a href="/help/bbcode" target="_blank">(BBCode?)</a> <br />
 						<textarea name="content" class="large-width"></textarea> <br />

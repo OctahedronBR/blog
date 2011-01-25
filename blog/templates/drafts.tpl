@@ -1,4 +1,7 @@
 {% extends "layout.tpl" %}
+{% block header %}
+		<title>{{config.blogname}} | Rascunhos </title>
+{% endblock %}
 {% block body %}
 	{% for post in posts %}
 	<div class="post">

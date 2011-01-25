@@ -1,4 +1,7 @@
 {% extends "layout.tpl" %}
+{% block header %}
+		<title>{{config.blogname}} | Configurações gerais</title>
+{% endblock %}
 {% block body %}
 	<div class="section">
 		<h2>Configuração</h2>

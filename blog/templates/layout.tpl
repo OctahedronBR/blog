@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" type="image/x-icon" href="/images/icon48px.png" />
-		<link rel="stylesheet" type="text/css" href="/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
-		<link rel="alternate" type="application/rss+xml" title="{{config.blogname}} Feeds" href="{{config.url}}rss" />
-		{%block stylesheet %}
-		{% endblock %}
+		<meta name="author" content="Octahedron Desenvolvimento de Software LTDA" />
+		<meta name="msvalidate.01" content="8F837D913B4245B0480258530194829E" />
 
-		<title>{{config.blogname}}</title>
+		<link rel="shortcut icon" type="image/x-icon" href="/images/icon48px.png" />
+		<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
+		<link rel="alternate" type="application/rss+xml" title="{{config.blogname}} Feeds" href="{{config.url}}rss" />
+		{%block header %}
+		{% endblock %}
 	</head>
 	<body>
 		<div id="content">
@@ -34,11 +35,13 @@
 				<hr />
 				<div id="links">
 					<h2>_Links</h2>
+					{% if config.links.count() > 0 %}
 					<ul>
-					{% for link in config.links%}
+					{% for link in config.links %}
 						<li><a href="{{link.url}}" target="_blank">{{link.name}}</a></li>
 					{% endfor %}
 					</ul>
+					{% endif %}
 				</div>
 				<hr />
 				<div id="access">

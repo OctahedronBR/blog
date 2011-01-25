@@ -1,4 +1,7 @@
 {% extends "layout.tpl" %}
+{% block header %}
+		<title>{{config.blogname}} | Add link</title>
+{% endblock %}
 {% block body %}
 	<div class="section">
 		<h2>Adicionar Link</h2>

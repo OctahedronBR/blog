@@ -35,17 +35,24 @@ def create_post(form):
 	is cleaned.
 	"""
 	slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
-	tags = form['tags'].split(",") if (len(form['tags']) > 0) else []
+	tags = __strip_tags(form['tags'].split(",")) if (len(form['tags']) > 0) else []
 	striped = strip_html_code(form['content'])
+	desc = form['desc']
 	as_draft = form.has_key('draft')
 	html = bbcode_to_html(striped)
-	post = Post(title=form['title'], slug=slug, tags=tags, author=users.get_current_user(), coded_content=striped, html_content=html, as_draft=as_draft)
+	post = Post(title=form['title'], slug=slug, tags=tags, desc=desc, author=users.get_current_user(), coded_content=striped, html_content=html, as_draft=as_draft)
 	post.put() 
 	memcache.set(str(post.key()), post)
 	memcache.delete_multi(['all_posts_10', 'all_drafts_10'])
 	update_sitemap()
 	twit_post(str(post.key()))
 	return post
+
+def __strip_tags(tags):
+	tags_stripped = []
+	for tag in tags:
+		tags_stripped.append(tag.strip())
+	return tags_stripped
 
 def update_post(form):
 	"""
@@ -59,8 +66,9 @@ def update_post(form):
 	if post.slug != slugify(form['slug']):
 		memcache.delete(post.slug)
 	post.title = form['title']
-	post.tags = form['tags'].split(",") if (len(form['tags']) > 0) else []
+	post.tags = __strip_tags(form['tags'].split(",")) if (len(form['tags']) > 0) else []
 	post.slug = slugify(form['slug']) if (len(form['slug']) > 0) else slugify(form['title'])
+	post.desc = form['desc']
 	post.coded_content = strip_html_code(form['content'])
 	post.html_content = bbcode_to_html(post.coded_content)
 	post.as_draft = form.has_key('draft')	
@@ -255,6 +263,7 @@ def __is_twitter_configured():
 class Post(db.Model):
 	title = db.StringProperty(required = True)
 	slug = db.StringProperty(required = True)
+	desc = db.StringProperty(required = False)
 	coded_content = db.TextProperty(required = True)
 	html_content = db.TextProperty(required = True)
 	when = db.DateTimeProperty(auto_now_add = True)
