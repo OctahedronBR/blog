@@ -4,6 +4,7 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<meta name="author" content="Octahedron Desenvolvimento de Software LTDA" />
+		<meta name="google-site-verification" content="J3vK68sDvX45SktALH9Siv-sUP5Wcd6PFMhv-3sWR3o" />
 		<meta name="msvalidate.01" content="8F837D913B4245B0480258530194829E" />
 
 		<link rel="shortcut icon" type="image/x-icon" href="/images/icon48px.png" />
