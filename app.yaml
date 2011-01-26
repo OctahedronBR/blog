@@ -17,6 +17,10 @@ handlers:
 - url: /fonts
   static_dir: fonts
 
+- url: /robots.txt
+  static_files: robots.txt 
+  upload: robots.tx
+
 - url: /help/bbcode
   static_files: bbcode_help.html 
   upload: bbcode_help.html
