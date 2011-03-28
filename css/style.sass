@@ -1,0 +1,223 @@
+/* font-faces */
+@font-face
+	font-family: 'Fontin Sans'
+	src: url('/fonts/fontin_sans_i_45b-webfont.eot')
+	src: local('☺'), url('/fonts/fontin_sans_i_45b-webfont.woff') format('woff'), url('/fonts/fontin_sans_i_45b-webfont.ttf') format('truetype'), url('/fonts/fontin_sans_i_45b-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 400
+	font-style: italic
+@font-face
+	font-family: 'Fontin Sans'
+	src: url('/fonts/fontin_sans_b_45b-webfont.eot')
+	src: local('☺'), url('/fonts/fontin_sans_b_45b-webfont.woff') format('woff'), url('/fonts/fontin_sans_b_45b-webfont.ttf') format('truetype'), url('/fonts/fontin_sans_b_45b-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 700
+	font-style: normal
+@font-face
+	font-family: 'Fontin Sans'
+	src: url('/fonts/fontin_sans_bi_45b-webfont.eot')
+	src: local('☺'), url('/fonts/fontin_sans_bi_45b-webfont.woff') format('woff'), url('/fonts/fontin_sans_bi_45b-webfont.ttf') format('truetype'), url('/fonts/fontin_sans_bi_45b-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 700
+	font-style: italic
+@font-face
+	font-family: 'Fontin Sans'
+	src: url('/fonts/fontin_sans_r_45b-webfont.eot')
+	src: local('☺'), url('/fonts/fontin_sans_r_45b-webfont.woff') format('woff'), url('/fonts/fontin_sans_r_45b-webfont.ttf') format('truetype'), url('/fonts/fontin_sans_r_45b-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 400
+	font-style: normal
+
+@font-face
+	font-family: 'PT Sans'
+	src: url('/fonts/PTS75F-webfont.eot')
+	src: local('☺'), url('/fonts/PTS75F-webfont.woff') format('woff'), url('/fonts/PTS75F-webfont.ttf') format('truetype'), url('/fonts/PTS75F-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 700
+	font-style: normal
+@font-face
+	font-family: 'PT Sans'
+	src: url('/fonts/PTS76F-webfont.eot')
+	src: local('☺'), url('/fonts/PTS76F-webfont.woff') format('woff'), url('/fonts/PTS76F-webfont.ttf') format('truetype'), url('/fonts/PTS76F-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 700
+	font-style: italic
+@font-face
+	font-family: 'PT Sans'
+	src: url('/fonts/PTS56F-webfont.eot')
+	src: local('☺'), url('/fonts/PTS56F-webfont.woff') format('woff'), url('/fonts/PTS56F-webfont.ttf') format('truetype'), url('/fonts/PTS56F-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 400
+	font-style: italic
+@font-face
+	font-family: 'PT Sans'
+	src: url('/fonts/PTS55F-webfont.eot')
+	src: local('☺'), url('/fonts/PTS55F-webfont.woff') format('woff'), url('/fonts/PTS55F-webfont.ttf') format('truetype'), url('/fonts/PTS55F-webfont.svg#webfontX4pGz9fc') format('svg')
+	font-weight: 400
+	font-style: normal
+
+/* declarations */
+$dark: #70694a
+$light: #cce7d4
+$lighter-dark: #a29979
+$dark-hover: #8e8768
+
+/* misc */
+h1
+	font-size: 24.5px
+
+h2
+	font-size: 22.5px
+
+h3
+	font-size: 20px
+
+h4
+	font-size: 18px
+
+h5
+	font-size: 16px
+
+h6
+	font-size: 15px
+
+h1, h2, h3, h4, h5, h6
+	font-family: "Fontin Sans", "Lucida Grande", "Arial", "Helvetica", "Verdana", "Gill Sans", sans-serif
+
+a
+	text-decoration: none
+
+a, a:visited
+	color: $dark
+
+a:hover
+	color: $dark-hover
+
+hr
+	border: 1px solid #837d5f
+	border-top: 1px solid #655f43
+	height: 0
+	margin: 15px 0px
+
+/* classes */
+.left
+	float: left
+
+.right
+	float: right
+
+/* starts here */
+html
+	height: 100%
+
+body
+	font-family: "PT Sans", "Arial", "Helvetica", "Lucida Grande", "Gill Sans", "Verdana", sans-serif
+	background-color: #cce7d4
+	background-image: url('/images/bg-left.png'), url('/images/bg-right.png')
+	background-repeat: no-repeat, no-repeat
+	background-position: 0 125%, 100% 0
+
+section#container
+	margin: 0 auto
+	width: 850px
+	display: table
+
+section#content
+	width: 630px
+	height: 100%
+	margin-bottom: 30px
+
+	> section.intern
+
+		> h3
+			margin: 15px 0 5px
+
+		> form > fieldset > button
+			margin: 0 0 5px
+
+		> form > fieldset > label
+
+			> input[type='text'], > textarea
+				width: 275px
+
+			> input, > textarea
+				margin: 0 0 5px
+
+			> textarea
+				height: 100px
+
+			> input[type="checkbox"]
+				margin-right: 3px
+				vertical-align: middle
+
+	> article, > section.intern
+		margin: 30px 0 0
+		padding: 10px 0 10px 10px
+		background: rgba(255, 255, 255, 0.7)
+		-moz-box-shadow: -5px 0px 15px #999
+		-webkit-box-shadow: -5px 0px 15px #999
+		box-shadow: -5px 0px 15px #999
+
+		> h2
+			margin: 0 0 7px -10px
+			padding: 7px 10px 5px
+			color: $light
+			background-color: $dark
+
+			> a, > a:visited
+				color: $light
+
+			> a:hover
+				color: $lighter-dark
+
+		> h6
+			text-align: right
+			margin: 0 10px 7px
+
+		> footer
+			margin: 15px 0 0
+
+			> a, a:visited
+				color: $dark
+
+			> a:hover
+				color: $dark-hover
+
+/* sidebar */
+section#container > aside
+	position: fixed
+	margin-left: 630px
+	padding: 10px
+	width: 200px
+	height: 100%
+	background: $dark
+	-moz-box-shadow: 7px 0px 10px #999
+	-webkit-box-shadow: 7px 0px 10px #999
+	box-shadow: 7px 0px 10px #999
+
+	header
+		text-align: center
+
+	div.search
+		background: #fff url('/images/search.png') no-repeat right
+		padding: 3px 4px 2px
+		-moz-border-radius: 5px
+		-webkit-border-radius: 5px
+		border-radius: 5px
+
+		> form > fieldset > input
+			width: 90%
+			border: none
+
+	> div 
+
+		> h2
+			color: $light
+
+		> nav
+			margin: 0
+
+			> ul > li
+				padding: 3px 0
+				font-size: 14.5px
+
+				> a 
+					padding: 2px 3px
+					color: $lighter-dark
+
+				> a:hover
+					color: $dark
+					background-color: $light

@@ -1,0 +1,79 @@
+/* font-faces */
+@font-face { font-family: "Fontin Sans"; src: url("/fonts/fontin_sans_i_45b-webfont.eot"); src: local("☺"), url("/fonts/fontin_sans_i_45b-webfont.woff") format("woff"), url("/fonts/fontin_sans_i_45b-webfont.ttf") format("truetype"), url("/fonts/fontin_sans_i_45b-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 400; font-style: italic; }
+
+@font-face { font-family: "Fontin Sans"; src: url("/fonts/fontin_sans_b_45b-webfont.eot"); src: local("☺"), url("/fonts/fontin_sans_b_45b-webfont.woff") format("woff"), url("/fonts/fontin_sans_b_45b-webfont.ttf") format("truetype"), url("/fonts/fontin_sans_b_45b-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 700; font-style: normal; }
+
+@font-face { font-family: "Fontin Sans"; src: url("/fonts/fontin_sans_bi_45b-webfont.eot"); src: local("☺"), url("/fonts/fontin_sans_bi_45b-webfont.woff") format("woff"), url("/fonts/fontin_sans_bi_45b-webfont.ttf") format("truetype"), url("/fonts/fontin_sans_bi_45b-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 700; font-style: italic; }
+
+@font-face { font-family: "Fontin Sans"; src: url("/fonts/fontin_sans_r_45b-webfont.eot"); src: local("☺"), url("/fonts/fontin_sans_r_45b-webfont.woff") format("woff"), url("/fonts/fontin_sans_r_45b-webfont.ttf") format("truetype"), url("/fonts/fontin_sans_r_45b-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 400; font-style: normal; }
+
+@font-face { font-family: "PT Sans"; src: url("/fonts/PTS75F-webfont.eot"); src: local("☺"), url("/fonts/PTS75F-webfont.woff") format("woff"), url("/fonts/PTS75F-webfont.ttf") format("truetype"), url("/fonts/PTS75F-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 700; font-style: normal; }
+
+@font-face { font-family: "PT Sans"; src: url("/fonts/PTS76F-webfont.eot"); src: local("☺"), url("/fonts/PTS76F-webfont.woff") format("woff"), url("/fonts/PTS76F-webfont.ttf") format("truetype"), url("/fonts/PTS76F-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 700; font-style: italic; }
+
+@font-face { font-family: "PT Sans"; src: url("/fonts/PTS56F-webfont.eot"); src: local("☺"), url("/fonts/PTS56F-webfont.woff") format("woff"), url("/fonts/PTS56F-webfont.ttf") format("truetype"), url("/fonts/PTS56F-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 400; font-style: italic; }
+
+@font-face { font-family: "PT Sans"; src: url("/fonts/PTS55F-webfont.eot"); src: local("☺"), url("/fonts/PTS55F-webfont.woff") format("woff"), url("/fonts/PTS55F-webfont.ttf") format("truetype"), url("/fonts/PTS55F-webfont.svg#webfontX4pGz9fc") format("svg"); font-weight: 400; font-style: normal; }
+
+/* declarations */
+/* misc */
+h1 { font-size: 24.5px; }
+
+h2 { font-size: 22.5px; }
+
+h3 { font-size: 20px; }
+
+h4 { font-size: 18px; }
+
+h5 { font-size: 16px; }
+
+h6 { font-size: 15px; }
+
+h1, h2, h3, h4, h5, h6 { font-family: "Fontin Sans", "Lucida Grande", "Arial", "Helvetica", "Verdana", "Gill Sans", sans-serif; }
+
+a { text-decoration: none; }
+
+a, a:visited { color: #70694a; }
+
+a:hover { color: #8e8768; }
+
+hr { border: 1px solid #837d5f; border-top: 1px solid #655f43; height: 0; margin: 15px 0px; }
+
+/* classes */
+.left { float: left; }
+
+.right { float: right; }
+
+/* starts here */
+html { height: 100%; }
+
+body { font-family: "PT Sans", "Arial", "Helvetica", "Lucida Grande", "Gill Sans", "Verdana", sans-serif; background-color: #cce7d4; background-image: url("/images/bg-left.png"), url("/images/bg-right.png"); background-repeat: no-repeat, no-repeat; background-position: 0 125%, 100% 0; }
+
+section#container { margin: 0 auto; width: 850px; display: table; }
+
+section#content { width: 630px; height: 100%; margin-bottom: 30px; }
+section#content > section.intern > h3 { margin: 15px 0 5px; }
+section#content > section.intern > form > fieldset > button { margin: 0 0 5px; }
+section#content > section.intern > form > fieldset > label > input[type='text'], section#content > section.intern > form > fieldset > label > textarea { width: 275px; }
+section#content > section.intern > form > fieldset > label > input, section#content > section.intern > form > fieldset > label > textarea { margin: 0 0 5px; }
+section#content > section.intern > form > fieldset > label > textarea { height: 100px; }
+section#content > section.intern > form > fieldset > label > input[type="checkbox"] { margin-right: 3px; vertical-align: middle; }
+section#content > article, section#content > section.intern { margin: 30px 0 0; padding: 10px 0 10px 10px; background: rgba(255, 255, 255, 0.7); -moz-box-shadow: -5px 0px 15px #999999; -webkit-box-shadow: -5px 0px 15px #999999; box-shadow: -5px 0px 15px #999999; }
+section#content > article > h2, section#content > section.intern > h2 { margin: 0 0 7px -10px; padding: 7px 10px 5px; color: #cce7d4; background-color: #70694a; }
+section#content > article > h2 > a, section#content > article > h2 > a:visited, section#content > section.intern > h2 > a, section#content > section.intern > h2 > a:visited { color: #cce7d4; }
+section#content > article > h2 > a:hover, section#content > section.intern > h2 > a:hover { color: #a29979; }
+section#content > article > h6, section#content > section.intern > h6 { text-align: right; margin: 0 10px 7px; }
+section#content > article > footer, section#content > section.intern > footer { margin: 15px 0 0; }
+section#content > article > footer > a, section#content > article > footer a:visited, section#content > section.intern > footer > a, section#content > section.intern > footer a:visited { color: #70694a; }
+section#content > article > footer > a:hover, section#content > section.intern > footer > a:hover { color: #8e8768; }
+
+/* sidebar */
+section#container > aside { position: fixed; margin-left: 630px; padding: 10px; width: 200px; height: 100%; background: #70694a; -moz-box-shadow: 7px 0px 10px #999999; -webkit-box-shadow: 7px 0px 10px #999999; box-shadow: 7px 0px 10px #999999; }
+section#container > aside header { text-align: center; }
+section#container > aside div.search { background: white url("/images/search.png") no-repeat right; padding: 3px 4px 2px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+section#container > aside div.search > form > fieldset > input { width: 90%; border: none; }
+section#container > aside > div > h2 { color: #cce7d4; }
+section#container > aside > div > nav { margin: 0; }
+section#container > aside > div > nav > ul > li { padding: 3px 0; font-size: 14.5px; }
+section#container > aside > div > nav > ul > li > a { padding: 2px 3px; color: #a29979; }
+section#container > aside > div > nav > ul > li > a:hover { color: #70694a; background-color: #cce7d4; }
