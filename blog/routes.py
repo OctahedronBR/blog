@@ -115,6 +115,17 @@ def twitter_callback():
 	# it's a get, so access request parameters using args instead of form
 	model.configure_twitter_access(request.args)
 	return redirect(url_for('edit_config'))	
+
+@app.route('/config/analytics')
+@login_required
+def config_analytics():
+	return render("config_analytics.tpl")
+
+@app.route('/config/analytics', methods=['POST'])
+@login_required
+def save_analytics():
+	model.configure_analytics(request.form);
+	return redirect(url_for('edit_config'))
 # CONFIG END #
 
 # POST BEGIN #

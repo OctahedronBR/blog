@@ -60,12 +60,13 @@ section#content > section.intern > form > fieldset > label > textarea { height: 
 section#content > section.intern > form > fieldset > label > input[type="checkbox"] { margin-right: 3px; vertical-align: middle; }
 section#content > article, section#content > section.intern { margin: 30px 0 0; padding: 10px 0 10px 10px; background: rgba(255, 255, 255, 0.7); -moz-box-shadow: -5px 0px 15px #999999; -webkit-box-shadow: -5px 0px 15px #999999; box-shadow: -5px 0px 15px #999999; }
 section#content > article > h2, section#content > section.intern > h2 { margin: 0 0 7px -10px; padding: 7px 10px 5px; color: #cce7d4; background-color: #70694a; }
-section#content > article > h2 > a, section#content > article > h2 > a:visited, section#content > section.intern > h2 > a, section#content > section.intern > h2 > a:visited { color: #cce7d4; }
+section#content > article > h2 > a, section#content > article > h2 > a:visited, section#content > section.intern > h2 > a, section#content > section.intern > h2 > a:visited { color: #cce7d4; border-bottom: 1px dashed #70694a; }
 section#content > article > h2 > a:hover, section#content > section.intern > h2 > a:hover { color: #a29979; }
 section#content > article > h6, section#content > section.intern > h6 { text-align: right; margin: 0 10px 7px; }
 section#content > article > footer, section#content > section.intern > footer { margin: 15px 0 0; }
 section#content > article > footer > a, section#content > article > footer a:visited, section#content > section.intern > footer > a, section#content > section.intern > footer a:visited { color: #70694a; }
 section#content > article > footer > a:hover, section#content > section.intern > footer > a:hover { color: #8e8768; }
+section#content > article > dl > dt, section#content > section.intern > dl > dt { font-weight: bold; margin: 0 5px 0 0; float: left; }
 
 /* sidebar */
 section#container > aside { position: fixed; margin-left: 630px; padding: 10px; width: 200px; height: 100%; background: #70694a; -moz-box-shadow: 7px 0px 10px #999999; -webkit-box-shadow: 7px 0px 10px #999999; box-shadow: 7px 0px 10px #999999; }

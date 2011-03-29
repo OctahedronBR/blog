@@ -13,7 +13,7 @@
 		<meta name="google-site-verification" content="J3vK68sDvX45SktALH9Siv-sUP5Wcd6PFMhv-3sWR3o" />
 		<meta name="msvalidate.01" content="8F837D913B4245B0480258530194829E" />
 
-		<link rel="shortcut icon" type="image/x-icon" href="/images/icon48px.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
 		<link rel="stylesheet" type="text/css" href="/css/boilerplate.css" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<link rel="alternate" type="application/rss+xml" title="{{config.blogname}} Feeds" href="{{config.url}}rss" />
@@ -34,7 +34,7 @@
 				<hr />
 				<header>
 					<a href="{{config.url}}">
-						<img alt="Octahedron" src="/images/logo-light-normal.png" width="132px" height="109px" />
+						<img alt="Octahedron" src="/images/logo-light-normal.png" width="132" height="109" />
 					</a><br />
 				</header>
 				<hr />

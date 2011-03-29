@@ -15,19 +15,19 @@
 			<fieldset>
 				<label for="blogname">
 					Nome do blog: <br />
-					<input type="text" name="blogname" class="normal-width"/> <br />
+					<input type="text" id="blogname" name="blogname" /> <br />
 				</label>
 				<label for="url">
 					URL: <br />
-					<input type="text" name="url" class="normal-width"/> <br />
+					<input type="text" id="url" name="url" /> <br />
 				</label>
 				<label for="desc">
 					Descrição: <br />
-					<textarea name="desc" class="normal-width"></textarea> <br />
+					<textarea id="desc" name="desc" ></textarea> <br />
 				</label>
 				<label for="lang">
 					Língua: [e.g.: 'en', 'pt_BR', ...] <br />
-					<input tyhead.js("http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"pe="text" name="lang" class="tiny-width"/> <br />
+					<input type="text" id="lang" name="lang" /> <br />
 				</label>
 				<input id="submit" type="submit" value="Salvar" />
 			</fieldset>

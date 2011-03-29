@@ -15,12 +15,12 @@
 		<p class="warning"></p>
 		<form action="/post/update" method="post">
 			<fieldset>
-				<input type="hidden" name="key" value="{{ post.key() }}" class="normal-width"/>
+				<input type="hidden" name="key" value="{{ post.key() }}" />
 				<label for="title">
 					Título: <br />
-					<input type="text" name="title" value="{{ post.title }}" class="normal-width"/> <br />
+					<input type="text" name="title" value="{{ post.title }}" /> <br />
 				</label>
-				<input type="text" name="slug" value="{{ post.slug }}" class="normal-width"/>
+				<input type="text" name="slug" value="{{ post.slug }}" />
 				<button id="slugify">Slugify!</button> <br />
 				<label for="desc">
 					Descrição do conteúdo: (~160 caracteres / <a href="http://en.wikipedia.org/wiki/Search_engine_optimization" target="_blank">SEO</a>) <br />
@@ -32,7 +32,7 @@
 				</label>
 				<label for="tags">
 					Tags: <br />
-					<input type="text" name="tags" value="{{ tags }}" class="normal-width"/> <br />
+					<input type="text" name="tags" value="{{ tags }}" /> <br />
 				</label>
 				<label for="draft">
 					<input type="checkbox" name="draft" value="True" {% if draft %}checked{% endif %}/>Rascunho <br />

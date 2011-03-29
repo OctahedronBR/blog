@@ -15,30 +15,32 @@
 			<fieldset>
 				<label for="blogname">
 					Nome do Blog: <br />
-					<input type="text" id="blogname" name="blogname" value="{{ config.blogname }}" class="normal-width"/> <br />
+					<input type="text" id="blogname" name="blogname" value="{{ config.blogname }}" /> <br />
 				</label>
 
 				<label for="url">
 					URL: <br />
-					<input type="text" id="url" name="url" value="{{ config.url }}" class="normal-width"/> <br />
+					<input type="text" id="url" name="url" value="{{ config.url }}" /> <br />
 				</label>
 
 				<label for="desc">
 					Descrição: <br />
-					<textarea id="desc" name="desc" class="normal-width">{{ config.desc }}</textarea> <br />
+					<textarea id="desc" name="desc" >{{ config.desc }}</textarea> <br />
 				</label>
 
 				<label for="lang">
 					Língua: [e.g.: 'en', 'pt_BR', ...] <br />
-					<input type="text" id="lang" name="lang" value="{{ config.lang }}" class="tiny-width"/> <br />
+					<input type="text" id="lang" name="lang" value="{{ config.lang }}" /> <br />
 				</label>
 
 				<input id="submit" type="submit" value="Salvar" />
 			</fieldset>
 		</form>
 
+		<hr />
+
 		<h3>Links <small>[<a href="/config/add_link">Adicionar novo</a>]</small></h3>
-		{% if config.links %}
+		{% if config.links.count() > 0 %}
 		<ul>
 		{% for link in config.links %}
 			<li>{{link.name}} - {{link.url}} <small>[<a href="/config/remove_link/{{link.name}}" title="Remove">X</a>]</small></li>
@@ -53,6 +55,15 @@
 		<dl>
 			<dt>Access key:</dt> <dd>{{config.access_key}}</dd>
 			<dt>Access secret:</dt> <dd>{{config.access_secret}}</dd>
+		</dl>
+		{% else %}
+		<p>Nenhuma configuração.</p>
+		{% endif %}
+
+		<h3>Google Analytics <small>[<a href="/config/analytics">Configurar</a>]</small></h3>
+		{% if config.analytics %}
+		<dl>
+			<dt>Chave:</dt> <dd>{{config.analytics}}</dd>
 		</dl>
 		{% else %}
 		<p>Nenhuma configuração.</p>

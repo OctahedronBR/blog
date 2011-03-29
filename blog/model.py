@@ -177,6 +177,15 @@ def add_link(form):
 	link = Link(name=name, url=url, blog=get_config())
 	link.put()
 
+def configure_analytics(form):
+	"""
+	Configure google analytics key
+	"""
+	config = get_config()
+	config.analytics = form['key']
+	config.put()
+	memcache.set('config', config)
+
 def configure_twitter(form):
 	"""
 	Configure twitter [improve this!]
@@ -280,6 +289,7 @@ class Config(db.Model):
 	consumer_secret = db.StringProperty()
 	access_key = db.StringProperty()
 	access_secret = db.StringProperty()
+	analytics = db.StringProperty()
 
 class Link(db.Model):
 	name = db.StringProperty(required=True)

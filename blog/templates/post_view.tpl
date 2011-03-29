@@ -6,10 +6,8 @@
 {% endblock %}
 {% block body %}
 	<article>
-		<header>
 		<h2>{{ post.title }} {% if user %}[<a href="/post/edit/{{ post.key() }}">Editar</a> | <a href="/remove/{{ post.key() }}">Remover</a>]{% endif %}</h2>
 		<h6>Publicado em {{ post.when.strftime("%d/%m/%Y") }} por {{ post.author.nickname() }}</h6>
-		</header>
 		{{ post.html_content }}
 		<footer>
 			Tags:
