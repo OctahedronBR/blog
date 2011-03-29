@@ -83,6 +83,7 @@
 		<!--[if lt IE 7 ]>
 			<script>head.js("/js/libs/dd_belatedpng.js", function() {DD_belatedPNG.fix("img, .png_bg")}</script>
 		<![endif]-->
+		{% block scripts_bottom %}{% endblock %}
 	</body>
 </html>
 

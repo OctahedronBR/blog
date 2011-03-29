@@ -26,4 +26,13 @@
 	{% endfor %}
 {% endblock %}
 
-<!-- por google analytics -->
+{% block scripts_bottom %}
+	{% if config.analytics %}
+		<script>
+			var _gaq=[["_setAccount","{{ config.analytics }}"],["_trackPageview"]];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+			g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+			s.parentNode.insertBefore(g,s)}(document,"script"));
+		</script>
+	{% endif %}
+{% endblock %}
