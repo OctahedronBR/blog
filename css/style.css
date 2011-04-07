@@ -58,7 +58,8 @@ section#content > section.intern > form > fieldset > label > input[type='text'],
 section#content > section.intern > form > fieldset > label > input, section#content > section.intern > form > fieldset > label > textarea { margin: 0 0 5px; }
 section#content > section.intern > form > fieldset > label > textarea { height: 100px; }
 section#content > section.intern > form > fieldset > label > input[type="checkbox"] { margin-right: 3px; vertical-align: middle; }
-section#content > article, section#content > section.intern { margin: 30px 0 0; padding: 10px 0 10px 10px; background: rgba(255, 255, 255, 0.7); -moz-box-shadow: -5px 0px 15px #999999; -webkit-box-shadow: -5px 0px 15px #999999; box-shadow: -5px 0px 15px #999999; }
+section#content > article, section#content > section.intern { margin: 30px 0 0; padding: 10px 0 10px 10px; font-size: 14.5px; background: rgba(255, 255, 255, 0.7); -moz-box-shadow: -5px 0px 15px #999999; -webkit-box-shadow: -5px 0px 15px #999999; box-shadow: -5px 0px 15px #999999; }
+section#content > article > p, section#content > section.intern > p { font-size: 14.5px; }
 section#content > article > h2, section#content > section.intern > h2 { margin: 0 0 7px -10px; padding: 7px 10px 5px; color: #cce7d4; background-color: #70694a; }
 section#content > article > h2 > a, section#content > article > h2 > a:visited, section#content > section.intern > h2 > a, section#content > section.intern > h2 > a:visited { color: #cce7d4; border-bottom: 1px dashed #70694a; }
 section#content > article > h2 > a:hover, section#content > section.intern > h2 > a:hover { color: #a29979; }
